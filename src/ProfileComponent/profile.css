@@ -1,0 +1,32 @@
+.profile {
+    border: 1px solid red;
+    /* align-self: flex-start;
+    display: grid;
+    justify-items: center;
+    align-items: center; */
+}
+
+.profile-title {
+    text-align: center;
+}
+
+.nav {
+    border: 1px solid green;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nav-bar {
+    border: 1px solid blue;
+    width: 55%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.info {
+    border: 1px solid purple;
+}

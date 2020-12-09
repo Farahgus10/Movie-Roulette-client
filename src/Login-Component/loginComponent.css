@@ -1,0 +1,11 @@
+.logo {
+    border: 1px solid red;
+}
+
+.login_form, .signup_form {
+    border: 1px solid black;
+    align-self: flex-start;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
