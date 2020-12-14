@@ -1,7 +1,9 @@
 import React from 'react';
 import './movieRoulette.css'
 
-function MovieRoulette() {
+function MovieRoulette(props) {
+    console.log(props.movies)
+
     return(
         <div>
             <h1>Movie Roulette</h1>
