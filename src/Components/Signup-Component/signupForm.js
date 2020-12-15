@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Login-Component/logo';
-import '../Components/FooterComponent/Login-Component/loginComponent.css'
+// import '../Components/FooterComponent/Login-Component/loginComponent.css'
 
 function signupForm() {
     return(

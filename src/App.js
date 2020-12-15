@@ -1,21 +1,32 @@
 import React, {Component} from 'react';
 import { Route } from 'react-router-dom';
-import SignUpPage from './Signup-Component/signupForm';
-import LoginForm from './Login-Component/loginForm'
-import MoviePreference from './MovieQuiz-Component/moviePreference'
-import MovieRoulette from './MovieRoulette-Component/movieRoulette'
-import YourMovies from './ProfileComponent/yourMovies'
-import MovieProfile from './ProfileComponent/movieProfile'
-import Footer from './FooterComponent/footer';
+import SignUpPage from './Components/Signup-Component/signupForm';
+import LoginForm from './Components/Login-Component/loginForm'
+import MoviePreference from './Components/MovieQuiz-Component/moviePreference'
+import MovieRoulette from './Components/MovieRoulette-Component/movieRoulette'
+import YourMovies from './Components/ProfileComponent/yourMovies'
+import MovieProfile from './Components/ProfileComponent/movieProfile'
+import Footer from './Components/FooterComponent/footer'
+import MovieService from './Services/Movie-Service'
 import './App.css'
 
 class App extends React.Component {
   state = {
-      movieRoulette: ['movie 1', 'movie 2', 'movie 3', 'movie 4', 'movie 5'],
+      movieRoulette: [],
   }
 
+  componentDidMount() {
+    MovieService.getMovies()
+        .then(movie => {
+          this.setState({
+            movieRoulette: movie,
+          })
+        })
+  }
 
   render() {
+    let movies = (!this.state.movieRoulette) ? [] : this.state.movieRoulette.results
+
     return (
       <main className='App'>
         {/* <LoginForm/> */}
@@ -24,7 +35,7 @@ class App extends React.Component {
           <Route path='/genre-select' component={MoviePreference} />
 
           <Route exact path="/movie-roulette" render={() => (
-            <MovieRoulette movies={this.state.movieRoulette}/> 
+            <MovieRoulette movies={movies}/> 
           )} />
 
 
