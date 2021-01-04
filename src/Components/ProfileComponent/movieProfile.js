@@ -1,12 +1,13 @@
-import React from 'react-router-dom'
+import React from 'react'
 import MovieProfileNav from './movieProfileNav';
 
 import './profile.css'
 
-function MovieProfile() {
-    return(
+class MovieProfile extends React.Component {
+    render() {
+        return(
         <div className="profile">
-            <MovieProfileNav />
+            <MovieProfileNav path={this.props.path}/>
             <p className="profile-title">*Username's* Movie Profile</p>
 
             <div className="info">
@@ -24,6 +25,8 @@ function MovieProfile() {
             
         </div>
     )
+    }
+    
 }
 
 export default MovieProfile;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import SignUpPage from './Components/Signup-Component/signupForm';
 import LoginForm from './Components/Login-Component/loginForm'
 import MoviePreference from './Components/MovieQuiz-Component/moviePreference'
@@ -13,6 +13,7 @@ import './App.css'
 class App extends React.Component {
   state = {
       movieRoulette: [],
+      yourMovieList: [],
   }
 
   componentDidMount() {
@@ -26,6 +27,10 @@ class App extends React.Component {
 
   render() {
     let movies = (!this.state.movieRoulette) ? [] : this.state.movieRoulette.results
+    let loginComponent;
+    if(this.props != {}) {
+      loginComponent = <Route exact path='/' component={LoginForm} />
+    }
 
     return (
       <main className='App'>
@@ -35,12 +40,16 @@ class App extends React.Component {
           <Route path='/genre-select' component={MoviePreference} />
 
           <Route exact path="/movie-roulette" render={() => (
-            <MovieRoulette movies={movies}/> 
+            <MovieRoulette movies={movies} yourMovies={this.state.yourMovieList}/> 
           )} />
 
+          <Route exact path="/your-movies" render={() => (
+            <YourMovies yourMovies={this.state.yourMovieList} path={this.props.location}/> 
+          )} />
 
-          <Route path='/your-movies' component={YourMovies} />
-          <Route path='/movie-profile' component={MovieProfile} />
+          <Route exact path="/movie-profile" render={() => (
+            <MovieProfile path={this.props.location}/> 
+          )} />
         
         <Footer />
       </main>
@@ -48,4 +57,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

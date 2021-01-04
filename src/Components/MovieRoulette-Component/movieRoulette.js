@@ -6,8 +6,12 @@ class MovieRoulette extends React.Component {
         currentMovieIndex: 0,
     }
 
+    addToYourMovies = () => {
+        this.props.yourMovies.push(this.props.movies[this.state.currentMovieIndex])
+    }
+
     thumbsUp = () => {
-        console.log(this.state.currentMovieIndex)
+        this.addToYourMovies();
         //find index of the last image in array
         const lastIndex = this.state.currentMovieIndex.length - 1;
 
@@ -23,11 +27,17 @@ class MovieRoulette extends React.Component {
     }
     
     thumbsDown = () => {
-        this.thumbsUp();
+        if(this.state.currentMovieIndex > -1) {
+            this.props.movies.splice(this.state.currentMovieIndex, 1);
+        }
+        
+        this.setState({
+            currentMovieIndex: this.state.currentMovieIndex
+        })
     }
 
     render() {
-        const currentTitle = (!this.props.movies) ? [] : this.props.movies.map(item => {
+        const currentMovie = (!this.props.movies) ? [] : this.props.movies.map(item => {
             return item
         });
 
@@ -36,11 +46,11 @@ class MovieRoulette extends React.Component {
                 <h1>Movie Roulette</h1>
                 <div className="roulette">
                     <div className="roulette-pic">
-                        picture here
+                        {/* <img src={currentMovie[this.state.currentMovieIndex].poster_path} alt="image" /> */}
                     </div>
                     <div className="roulette-desc">
-                        <p><em><b>{currentTitle[this.state.currentMovieIndex].title}</b></em></p>
-                        <p>Movie description here</p>
+                        {/* <p><em><b>{currentMovie[this.state.currentMovieIndex].title}</b></em></p> */}
+                        {/* <p>{currentMovie[this.state.currentMovieIndex].overview}</p> */}
                     </div>
                 </div>
                 <div className="thumbs">

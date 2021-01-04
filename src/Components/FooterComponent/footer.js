@@ -7,6 +7,7 @@ export default function Footer() {
         <div className='footer'>
             <Link to='/'>Home</Link>
             <Link to='/movie-roulette'>Roulette</Link>
+            <Link to="/your-movies">Your Movies</Link>
         </div>
     )
 }
