@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    MovieService.getMovies()
+    MovieService.getAllMovies()
         .then(movie => {
           this.setState({
             movieRoulette: movie,
