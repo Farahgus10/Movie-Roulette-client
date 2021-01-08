@@ -9,7 +9,7 @@ const movieService = {
                     : res.json())
     },
 
-    getMyMovie()  {
+    getMyMovies()  {
         return fetch(`http://localhost:8000/myMovies`)
             .then(res => {
                 (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json()

@@ -25,8 +25,6 @@ class MovieRoulette extends React.Component {
         })
     }
 
-
-
     thumbsUp = () => {
         this.addToYourMovies();
         //find index of the last image in array
