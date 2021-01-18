@@ -11,9 +11,8 @@ const movieService = {
 
     getMyMovies()  {
         return fetch(`http://localhost:8000/myMovies`)
-            .then(res => {
-                (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json()
-            })
+            .then(res => 
+                (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json())
     },
 
     postMovie(id, title, overview, genre_id, release_date) {

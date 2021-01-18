@@ -5,7 +5,28 @@ import './movieRoulette.css'
 class MovieRoulette extends React.Component {
     state = {
         currentMovieIndex: 0,
+        movieRoulette: [],
+        yourMovieList: [],
     }
+
+    componentDidMount() {
+        MovieService.getMyMovies()
+            .then(movie => {
+                this.setState({
+                  yourMovieList: movie
+                })
+              })
+    
+        MovieService.getAllMovies()
+            .then(movie => {
+                let filteredMovies = movie.results.filter(val => {
+                    return this.props.movieIds.indexOf(val.id) === -1;
+                })
+                this.setState({
+                    movieRoulette: filteredMovies
+                })
+            })
+      }
 
     addToYourMovies = () => {
         // id, title, overview, genre_id, release_date
@@ -43,31 +64,44 @@ class MovieRoulette extends React.Component {
     
     thumbsDown = () => {
         if(this.state.currentMovieIndex > -1) {
-            this.props.movies.splice(this.state.currentMovieIndex, 1);
+            this.state.movieRoulette.splice(this.state.currentMovieIndex, 1);
         }
-        
+
+        let newArr = [...this.state.movieRoulette]
+
         this.setState({
-            currentMovieIndex: this.state.currentMovieIndex
+            currentMovieIndex: this.state.currentMovieIndex,
+            movieRoulette: newArr
         })
     }
 
-    render() {
-        const currentMovie = (!this.props.movies) ? [] : this.props.movies.map(item => {
-            return item
-        });
+    filterMovie() {
+        let movieIds = this.props.movieIds
+        let allMovies = this.state.movieRoulette.filter(movie => {
+           let id = movie.id;
+           return movieIds.indexOf(id) == -1;
+        })
 
-        console.log(currentMovie)
+        console.log(allMovies)
+    }
+
+
+    render() {
+
+        console.log(this.state.movieRoulette)
+
+        
 
         return (
             <div>
                 <h1>Movie Roulette</h1>
                 <div className="roulette">
                     <div className="roulette-pic">
-                        <img src={currentMovie[this.state.currentMovieIndex].poster_path} alt="image" />
+                        {/* <img src={currentMovie[this.state.currentMovieIndex].poster_path} alt="image" /> */}
                     </div>
                     <div className="roulette-desc">
-                        <p><em><b>{currentMovie[this.state.currentMovieIndex].title}</b></em></p>
-                        <p>{currentMovie[this.state.currentMovieIndex].overview}</p>
+                        {/* <p><em><b>{currentMovie[this.state.currentMovieIndex].title}</b></em></p> */}
+                        {/* <p>{currentMovie[this.state.currentMovieIndex].overview}</p> */}
                     </div>
                 </div>
                 <div className="thumbs">

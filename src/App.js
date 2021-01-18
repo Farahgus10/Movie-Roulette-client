@@ -17,16 +17,27 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    MovieService.getAllMovies()
+    MovieService.getMyMovies()
         .then(movie => {
-          this.setState({
-            movieRoulette: movie,
+            this.setState({
+              yourMovieList: movie
+            })
           })
-        })
+
+    MovieService.getAllMovies()
+        .then(movie => 
+          this.setState({
+            movieRoulette: movie.results,
+          })
+        )
   }
 
   render() {
-    let movies = (!this.state.movieRoulette) ? [] : this.state.movieRoulette.results
+    let myMovies = []; 
+    this.state.yourMovieList.map(movie => {
+      return myMovies.push(movie.id)
+    })
+
     let loginComponent;
     if(this.props != {}) {
       loginComponent = <Route exact path='/' component={LoginForm} />
@@ -40,7 +51,7 @@ class App extends React.Component {
           <Route path='/genre-select' component={MoviePreference} />
 
           <Route exact path="/movie-roulette" render={() => (
-            <MovieRoulette movies={movies} yourMovies={this.state.yourMovieList}/> 
+            <MovieRoulette yourMovies={this.state.myMovies} movieIds={myMovies}/> 
           )} />
 
           <Route exact path="/your-movies" render={() => (

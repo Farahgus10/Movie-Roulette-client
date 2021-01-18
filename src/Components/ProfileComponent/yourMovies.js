@@ -10,7 +10,6 @@ class YourMovies extends React.Component {
     componentDidMount() {
         MovieService.getMyMovies()
             .then(movie => {
-                console.log(movie)
                 this.setState({
                     yourMovies: movie
                 })
@@ -19,11 +18,22 @@ class YourMovies extends React.Component {
 
     render() {
         console.log(this.state.yourMovies)
+        const movieList = this.state.yourMovies.map((movie, i) => {
+            return (
+                <li key={i}>
+                   <ul>
+                       <p>{movie.title}</p>
+                       <p>{movie.overview}</p>
+                    </ul> 
+                </li>
+            )
+        })
 
         return( 
             <div>
                 <MovieProfileNav path={this.props.path}/>
                 <p>All the movies you have given a Thumbs Up to</p>
+                {movieList}
             </div>
         )
     }
