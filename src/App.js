@@ -53,7 +53,7 @@ class App extends React.Component {
           <Route path='/genre-select' component={MoviePreference} />
 
           <Route exact path="/movie-roulette" render={() => (
-            <MovieRoulette yourMovies={this.state.myMovies} movieIds={myMovies}/> 
+            <MovieRoulette yourMovies={this.state.myMovies} movieIds={myMovies} movieRoulette={this.state.movieRoulette}/> 
           )} />
 
           <Route exact path="/your-movies" render={() => (
