@@ -43,6 +43,8 @@ class App extends React.Component {
       loginComponent = <Route exact path='/' component={LoginForm} />
     }
 
+    console.log(myMovies)
+
     return (
       <main className='App'>
         {/* <LoginForm/> */}

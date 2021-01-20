@@ -30,7 +30,7 @@ class MovieRoulette extends React.Component {
 
     addToYourMovies = () => {
         // id, title, overview, genre_id, release_date
-        const currentMovie = this.props.movies[this.state.currentMovieIndex];
+        const currentMovie = this.state.movieRoulette[this.state.currentMovieIndex];
         const movieID = currentMovie.id;
         const movieTitle = currentMovie.original_title;
         const movieOverview = currentMovie.overview;
@@ -46,22 +46,6 @@ class MovieRoulette extends React.Component {
         })
     }
 
-    thumbsUp = () => {
-        this.addToYourMovies();
-        //find index of the last image in array
-        const lastIndex = this.state.currentMovieIndex.length - 1;
-
-        const { currentMovieIndex } = this.state;
-
-        //check if we need to start over from the last index
-        const resetIndex = currentMovieIndex === lastIndex;
-        const index = resetIndex ? 0 : currentMovieIndex + 1;
-
-        this.setState({
-            currentMovieIndex: index
-        })
-    }
-    
     thumbsDown = () => {
         if(this.state.currentMovieIndex > -1) {
             this.state.movieRoulette.splice(this.state.currentMovieIndex, 1);
@@ -75,33 +59,39 @@ class MovieRoulette extends React.Component {
         })
     }
 
-    filterMovie() {
-        let movieIds = this.props.movieIds
-        let allMovies = this.state.movieRoulette.filter(movie => {
-           let id = movie.id;
-           return movieIds.indexOf(id) == -1;
-        })
+    thumbsUp = () => {
+        this.addToYourMovies();
+        this.thumbsDown();
+        //find index of the last image in array
+        // const lastIndex = this.state.currentMovieIndex.length - 1;
 
-        console.log(allMovies)
+        // const { currentMovieIndex } = this.state;
+
+        // //check if we need to start over from the last index
+        // const resetIndex = currentMovieIndex === lastIndex;
+        // const index = resetIndex ? 0 : currentMovieIndex + 1;
+
+        // this.setState({
+        //     currentMovieIndex: index
+        // })
     }
 
-
     render() {
-
         console.log(this.state.movieRoulette)
-
-        
+        let currentMovieTitle = (!this.state.movieRoulette[this.state.currentMovieIndex]) ? [] : this.state.movieRoulette[this.state.currentMovieIndex].original_title;
+        let currentMovieOverview = (!this.state.movieRoulette[this.state.currentMovieIndex]) ? [] : this.state.movieRoulette[this.state.currentMovieIndex].overview;
+        let currentMoviePoster = (!this.state.movieRoulette[this.state.currentMovieIndex]) ? [] : this.state.movieRoulette[this.state.currentMovieIndex].poster_path;
 
         return (
             <div>
                 <h1>Movie Roulette</h1>
                 <div className="roulette">
                     <div className="roulette-pic">
-                        {/* <img src={currentMovie[this.state.currentMovieIndex].poster_path} alt="image" /> */}
+                        <img src={currentMoviePoster} alt="image" />
                     </div>
                     <div className="roulette-desc">
-                        {/* <p><em><b>{currentMovie[this.state.currentMovieIndex].title}</b></em></p> */}
-                        {/* <p>{currentMovie[this.state.currentMovieIndex].overview}</p> */}
+                        <p><em><b>{currentMovieTitle}</b></em></p>
+                        <p>{currentMovieOverview}</p>
                     </div>
                 </div>
                 <div className="thumbs">
