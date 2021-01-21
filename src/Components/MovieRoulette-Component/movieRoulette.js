@@ -5,6 +5,7 @@ import './movieRoulette.css'
 class MovieRoulette extends React.Component {
     state = {
         currentMovieIndex: 0,
+        currentMovieDisliked: true,
         filteredMovieList: [],
     }
 
@@ -40,33 +41,27 @@ class MovieRoulette extends React.Component {
             overview: movieOverview,
             genre_id: genreID,
             release_date: releaseDate,
+            disliked: this.state.currentMovieDisliked
         })
-
     }
 
     thumbsDown = () => {
+        this.addToYourMovies();
         if(this.state.currentMovieIndex > -1) {
             this.state.filteredMovieList.splice(this.state.currentMovieIndex, 1);
         }
-
         this.setState({
             currentMovieIndex: this.state.currentMovieIndex
         })
-        // this.filterMovies();
     }
 
     thumbsUp = () => {
-        this.addToYourMovies();
-
+        this.setState({
+            currentMovieDisliked: false
+        })
         //calling this.thumbsDown() b/c thumbsUp() requires the same action performed in thumbsDown() after adding to your movies
         this.thumbsDown();
     }
-
-    // filterMovies() {
-    //     const movieIDs = this.state.movieIds;
-    //     this.props.filteredMovies.filter(val => !movieIDs.includes(val.id)
-    //     );
-    // }
 
     render() {
         let currentMovieTitle = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].original_title;

@@ -15,14 +15,14 @@ const movieService = {
                 (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json())
     },
 
-    postMovie(id, title, overview, genre_id, release_date) {
+    postMovie(id, title, overview, genre_id, release_date, disliked) {
         return fetch(`http://localhost:8000/myMovies`, {
             method: 'POST',
             headers: {
                 'content-type':'application/json',
                 //authorization
             },
-            body: JSON.stringify(id, title, overview, genre_id, release_date),
+            body: JSON.stringify(id, title, overview, genre_id, release_date, disliked),
         })
             .then(res => {
                 (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json()
