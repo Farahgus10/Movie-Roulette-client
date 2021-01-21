@@ -5,42 +5,29 @@ import './movieRoulette.css'
 class MovieRoulette extends React.Component {
     state = {
         currentMovieIndex: 0,
-        movieRoulette: [],
         filteredMovieList: [],
-        yourMovieList: [],
-        movieIds: []
     }
 
     componentDidMount() {
-        MovieService.getMyMovies()
-            .then(movie => {
-                let idArr = [];
-                movie.map(val => {
-                    idArr.push(val.id)
-                    console.log(idArr)
-                })
-                console.log(idArr)
-                this.setState({
-                  yourMovieList: movie,
-                  movieIds: idArr
-                })
-              })
+       Promise.all([
+           MovieService.getMyMovies(),
+           MovieService.getAllMovies()
+       ]).then(([arr1, arr2]) => {
+           let myMovieIds = [];
+           arr1.map(movie => {
+               myMovieIds.push(movie.id);
+           })
+           let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
 
-        // MovieService.getAllMovies()
-        //     .then(movie => {
-        //         console.log(this.state.movieIds)
-        //         let filteredMovies = movie.results.filter(val => {
-        //             return this.props.movieIds.indexOf(val.id) === -1;
-        //         })
-        //         this.setState({
-        //             movieRoulette: filteredMovies
-        //         })
-        //     })
-      }
+           this.setState({
+                filteredMovieList: filteredMovies,
+           });
+       })
+    }
 
     addToYourMovies = () => {
         // id, title, overview, genre_id, release_date
-        const currentMovie = this.props.movieRoulette[this.state.currentMovieIndex];
+        const currentMovie = this.state.filteredMovieList[this.state.currentMovieIndex];
         const movieID = currentMovie.id;
         const movieTitle = currentMovie.original_title;
         const movieOverview = currentMovie.overview;
@@ -59,17 +46,13 @@ class MovieRoulette extends React.Component {
 
     thumbsDown = () => {
         if(this.state.currentMovieIndex > -1) {
-            this.props.movieRoulette.splice(this.state.currentMovieIndex, 1);
+            this.state.filteredMovieList.splice(this.state.currentMovieIndex, 1);
         }
 
-        let newArr = [...this.props.movieRoulette]
-
         this.setState({
-            currentMovieIndex: this.state.currentMovieIndex,
-            movieRoulette: newArr
+            currentMovieIndex: this.state.currentMovieIndex
         })
-
-        this.filterMovies();
+        // this.filterMovies();
     }
 
     thumbsUp = () => {
@@ -79,25 +62,16 @@ class MovieRoulette extends React.Component {
         this.thumbsDown();
     }
 
-    filterMovies() {
-        const movieIDs = this.state.movieIds;
-        this.props.movieRoulette.filter(val => !movieIDs.includes(val.id)
-        );
-
-        // this.setState({
-        //     filteredMovieList: allMovies,
-        // })
-    }
+    // filterMovies() {
+    //     const movieIDs = this.state.movieIds;
+    //     this.props.filteredMovies.filter(val => !movieIDs.includes(val.id)
+    //     );
+    // }
 
     render() {
-        console.log(this.state.movieIds)
-        console.log(this.props.movieRoulette)
-
-        let currentMovieTitle = (!this.props.movieRoulette[this.state.currentMovieIndex]) ? [] : this.props.movieRoulette[this.state.currentMovieIndex].original_title;
-        let currentMovieOverview = (!this.props.movieRoulette[this.state.currentMovieIndex]) ? [] : this.props.movieRoulette[this.state.currentMovieIndex].overview;
-        let currentMoviePoster = (!this.props.movieRoulette[this.state.currentMovieIndex]) ? [] : this.props.movieRoulette[this.state.currentMovieIndex].poster_path;
-
-        console.log(currentMovieTitle)
+        let currentMovieTitle = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].original_title;
+        let currentMovieOverview = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].overview;
+        let currentMoviePoster = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].poster_path;
 
         return (
             <div>

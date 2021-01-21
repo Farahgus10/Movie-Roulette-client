@@ -12,7 +12,6 @@ import './App.css'
 
 class App extends React.Component {
   state = {
-      movieRoulette: [],
       yourMovieList: [],
   }
 
@@ -23,27 +22,13 @@ class App extends React.Component {
               yourMovieList: movie
             })
           })
-
-    MovieService.getAllMovies()
-        .then(movie => 
-          this.setState({
-            movieRoulette: movie.results,
-          })
-        )
   }
 
   render() {
-    let myMovies = []; 
-    this.state.yourMovieList.map(movie => {
-      return myMovies.push(movie.id)
-    })
-
     let loginComponent;
     if(this.props != {}) {
       loginComponent = <Route exact path='/' component={LoginForm} />
     }
-
-    console.log(myMovies)
 
     return (
       <main className='App'>
@@ -53,7 +38,7 @@ class App extends React.Component {
           <Route path='/genre-select' component={MoviePreference} />
 
           <Route exact path="/movie-roulette" render={() => (
-            <MovieRoulette yourMovies={this.state.myMovies} movieIds={myMovies} movieRoulette={this.state.movieRoulette}/> 
+            <MovieRoulette /> 
           )} />
 
           <Route exact path="/your-movies" render={() => (
