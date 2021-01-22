@@ -11,13 +11,12 @@ class YourMovies extends React.Component {
         MovieService.getMyMovies()
             .then(movie => {
                 this.setState({
-                    yourMovies: movie
+                    yourMovies: movie.filter(val => !val.disliked)
                 })
             })
     }
 
     render() {
-        console.log(this.state.yourMovies)
         const movieList = this.state.yourMovies.map((movie, i) => {
             return (
                 <li key={i}>
