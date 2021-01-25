@@ -50,7 +50,6 @@ class MovieRoulette extends React.Component {
     }
 
     thumbsDown = () => {
-        // this.addToYourMovies();
         this.setState({
             currentMovieDisliked: true
         }, () => {
