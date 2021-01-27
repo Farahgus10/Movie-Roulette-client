@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import SignUpPage from './Components/Signup-Component/signupForm';
+import RegistrationRoute from './Routes/RegistrationRoute/registration'
 import LoginForm from './Components/Login-Component/loginForm'
 import MoviePreference from './Components/MovieQuiz-Component/moviePreference'
 import MovieRoulette from './Components/MovieRoulette-Component/movieRoulette'
@@ -34,7 +34,7 @@ class App extends React.Component {
       <main className='App'>
         {/* <LoginForm/> */}
           <Route exact path='/' component={LoginForm} />
-          <Route path='/signup' component={SignUpPage} />
+          <Route path='/signup' component={RegistrationRoute} />
           <Route path='/genre-select' component={MoviePreference} />
 
           <Route exact path="/movie-roulette" render={() => (
