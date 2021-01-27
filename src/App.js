@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import RegistrationRoute from './Routes/RegistrationRoute/registration'
-import LoginForm from './Components/Login-Component/loginForm'
+import LoginRoute from './Routes/LoginRoute/loginRoute'
 import MoviePreference from './Components/MovieQuiz-Component/moviePreference'
 import MovieRoulette from './Components/MovieRoulette-Component/movieRoulette'
 import YourMovies from './Components/ProfileComponent/yourMovies'
@@ -27,13 +27,13 @@ class App extends React.Component {
   render() {
     let loginComponent;
     if(this.props != {}) {
-      loginComponent = <Route exact path='/' component={LoginForm} />
+      loginComponent = <Route exact path='/' component={LoginRoute} />
     }
 
     return (
       <main className='App'>
         {/* <LoginForm/> */}
-          <Route exact path='/' component={LoginForm} />
+          <Route exact path='/' component={LoginRoute} />
           <Route path='/signup' component={RegistrationRoute} />
           <Route path='/genre-select' component={MoviePreference} />
 
