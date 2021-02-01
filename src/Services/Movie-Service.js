@@ -1,4 +1,4 @@
-
+import TokenService from './Token-service'
 
 const movieService = {
     getAllMovies() {
@@ -10,7 +10,11 @@ const movieService = {
     },
 
     getMyMovies()  {
-        return fetch(`http://localhost:8000/myMovies`)
+        return fetch(`http://localhost:8000/myMovies`), {
+            headers: {
+                'authorization': `basic ${TokenService.getAuthToken()}`,   
+            },
+        }
             .then(res => 
                 (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json())
     },
@@ -20,7 +24,7 @@ const movieService = {
             method: 'POST',
             headers: {
                 'content-type':'application/json',
-                //authorization
+                'authorization': `basic ${TokenService.getAuthToken()}`,   
             },
             body: JSON.stringify(id, title, overview, genre_id, release_date, disliked),
         })

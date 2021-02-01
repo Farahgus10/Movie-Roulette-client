@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import Nav from './Components/NavComponent/nav'
 import RegistrationRoute from './Routes/RegistrationRoute/registration'
 import LoginRoute from './Routes/LoginRoute/loginRoute'
 import MoviePreference from './Components/MovieQuiz-Component/moviePreference'
@@ -32,7 +33,9 @@ class App extends React.Component {
 
     return (
       <main className='App'>
+        <Nav />
         {/* <LoginForm/> */}
+          
           <Route exact path='/' component={LoginRoute} />
           <Route path='/signup' component={RegistrationRoute} />
           <Route path='/genre-select' component={MoviePreference} />
