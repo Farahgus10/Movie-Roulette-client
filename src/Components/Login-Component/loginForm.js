@@ -10,18 +10,18 @@ class loginForm extends React.Component {
         error: null
     }
 
-    handleSubmitBasicAuth = e => {
-        e.preventDefault();
-        const { full_name, password } = e.target;
+    // handleSubmitBasicAuth = e => {
+    //     e.preventDefault();
+    //     const { full_name, password } = e.target;
 
-        TokenService.saveAuthToken(
-            TokenService.makeBasicAuthToken(full_name.value, password.value)
-        )
+    //     TokenService.saveAuthToken(
+    //         TokenService.makeBasicAuthToken(full_name.value, password.value)
+    //     )
 
-        full_name.value = '';
-        password.value = '';
-        this.props.loginSuccess();
-    }
+    //     full_name.value = '';
+    //     password.value = '';
+    //     this.props.loginSuccess();
+    // }
 
     handleSubmit = e => {
         e.preventDefault();
@@ -35,6 +35,7 @@ class loginForm extends React.Component {
         .then(res => {
             full_name.value = ''
             password.value = ''
+            TokenService.saveAuthToken(res.authToken)
             this.props.loginSuccess();
         }) 
         .catch(res => {
@@ -49,7 +50,7 @@ class loginForm extends React.Component {
                 <Logo/>
                 <div className="login_form">
                     <h1>Login</h1>
-                    <form className="loginForm" onSubmit={this.handleSubmitBasicAuth}>
+                    <form className="loginForm" onSubmit={this.handleSubmit}>
                     <input type="text" name="full_name" id="full_name" placeholder="full_name"/>
                     <input type="password" name="password" id="password" placeholder="password"/>
                     <button type='submit' className="sign-up-button btn">Login</button>

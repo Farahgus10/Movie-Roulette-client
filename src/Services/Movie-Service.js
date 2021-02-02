@@ -2,7 +2,7 @@ import TokenService from './Token-service'
 
 const movieService = {
     getAllMovies() {
-        return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=2bb6427016a1701f4d730bde6d366c84&with_genres=28`)
+        return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=2bb6427016a1701f4d730bde6d366c84`)
             .then(res => 
                 (!res.ok)
                     ? res.json().then(e => Promise.reject(e))
@@ -10,11 +10,11 @@ const movieService = {
     },
 
     getMyMovies()  {
-        return fetch(`http://localhost:8000/myMovies`), {
+        return fetch(`http://localhost:8000/myMovies`, {
             headers: {
                 'authorization': `basic ${TokenService.getAuthToken()}`,   
             },
-        }
+        })
             .then(res => 
                 (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json())
     },

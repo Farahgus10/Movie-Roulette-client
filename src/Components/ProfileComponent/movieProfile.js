@@ -7,7 +7,7 @@ class MovieProfile extends React.Component {
     render() {
         return(
         <div className="profile">
-            <MovieProfileNav path={this.props.path}/>
+            <MovieProfileNav path={this.props.location}/>
             <p className="profile-title">*Username's* Movie Profile</p>
 
             <div className="info">

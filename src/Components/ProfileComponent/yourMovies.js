@@ -17,6 +17,7 @@ class YourMovies extends React.Component {
     }
 
     render() {
+        const path = this.props.location
         const movieList = this.state.yourMovies.map((movie, i) => {
             return (
                 <li key={i}>
@@ -30,7 +31,7 @@ class YourMovies extends React.Component {
 
         return( 
             <div>
-                <MovieProfileNav path={this.props.path}/>
+                <MovieProfileNav path={path}/>
                 <p>All the movies you have given a Thumbs Up to</p>
                 {movieList}
             </div>

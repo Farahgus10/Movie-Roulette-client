@@ -4,15 +4,16 @@ import TokenService from '../../Services/Token-service'
 
 
 export default class Nav extends React.Component {
-    // state = {
     
-    // }
+    handleLogoutClick() {
+        TokenService.clearAuthToken();
+    }
 
     renderLogoutLink() {
         return (
             <nav>
                 <div className="nav_link_logged_in">
-                <Link to='/'>Logout</Link>
+                <Link onClick={this.handleLogoutClick} to='/login'>Logout</Link>
                 </div>
             </nav>
         ) 
