@@ -12,7 +12,7 @@ const movieService = {
     getMyMovies()  {
         return fetch(`http://localhost:8000/myMovies`, {
             headers: {
-                'authorization': `basic ${TokenService.getAuthToken()}`,   
+                'authorization': `bearer ${TokenService.getAuthToken()}`,   
             },
         })
             .then(res => 
@@ -24,7 +24,7 @@ const movieService = {
             method: 'POST',
             headers: {
                 'content-type':'application/json',
-                'authorization': `basic ${TokenService.getAuthToken()}`,   
+                'authorization': `bearer ${TokenService.getAuthToken()}`,   
             },
             body: JSON.stringify(id, title, overview, genre_id, release_date, disliked),
         })

@@ -31,8 +31,7 @@ class App extends React.Component {
     if(this.props != {}) {
       loginComponent = <Route exact path='/' component={LoginRoute} />
     }
-
-    console.log(this.props.location)
+    
     return (
       <main className='App'>
         <Nav />
