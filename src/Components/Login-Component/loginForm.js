@@ -10,19 +10,6 @@ class loginForm extends React.Component {
         error: null
     }
 
-    // handleSubmitBasicAuth = e => {
-    //     e.preventDefault();
-    //     const { full_name, password } = e.target;
-
-    //     TokenService.saveAuthToken(
-    //         TokenService.makeBasicAuthToken(full_name.value, password.value)
-    //     )
-
-    //     full_name.value = '';
-    //     password.value = '';
-    //     this.props.loginSuccess();
-    // }
-
     handleSubmit = e => {
         e.preventDefault();
         const { full_name, password } = e.target;

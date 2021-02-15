@@ -1,13 +1,32 @@
 import React from 'react'
 import MovieProfileNav from './movieProfileNav';
 import MovieService from '../../Services/Movie-Service'
+import ProfileService from '../../Services/Profile-Service'
 
 class YourMovies extends React.Component {
     state = {
         yourMovies: [],
+        currentProfileInfo: [],
     }
 
     componentDidMount() {
+        ProfileService.getCurrentUserProfile()
+            .then(profile => {
+                console.log(profile)
+                if(profile.length == 0) {
+                    const newUserProfileInfo = {
+                        'profile_picture': 'profile pic here',
+                        'genre_like': 'none',
+                        'actor': 'none'
+                    }
+                    ProfileService.insertUserProfile(newUserProfileInfo)
+                }
+
+                this.setState({
+                    currentProfileInfo: profile
+                })
+            })
+
         MovieService.getMyMovies()
             .then(movie => {
                 this.setState({
@@ -16,24 +35,37 @@ class YourMovies extends React.Component {
             })
     }
 
-    render() {
-        const path = this.props.location
-        const movieList = this.state.yourMovies.map((movie, i) => {
+    renderProfileInfo() {
+        if(this.state.currentProfileInfo.length !== 0) {
             return (
-                <li key={i}>
-                   <ul>
-                       <p>{movie.title}</p>
-                       <p>{movie.overview}</p>
-                    </ul> 
-                </li>
+                this.state.yourMovies.map((movie, i) => {
+                    return (
+                        <div>
+                        <li key={i}>
+                           <ul>
+                               <p>{movie.title}</p>
+                               <p>{movie.overview}</p>
+                            </ul> 
+                        </li>
+                        </div>
+                    )
+                })
             )
-        })
+        } else {
+            return (
+                <h3>No movies here :(</h3>
+            )
+        }
+    }
+
+    render() {
+        console.log(this.state.currentProfileInfo)
+        const path = this.props.location
 
         return( 
             <div>
-                <MovieProfileNav path={path}/>
-                <p>All the movies you have given a Thumbs Up to</p>
-                {movieList}
+                <MovieProfileNav path={path} />
+                {this.renderProfileInfo()}
             </div>
         )
     }

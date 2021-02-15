@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieService from '../../Services/Movie-Service'
+import ProfileService from '../../Services/Profile-Service'
 import './movieRoulette.css'
 
 class MovieRoulette extends React.Component {
@@ -7,20 +8,34 @@ class MovieRoulette extends React.Component {
         currentMovieIndex: 0,
         currentMovieDisliked: true,
         filteredMovieList: [],
+        currentProfileInfo: [],
     }
 
     componentDidMount() {
+        ProfileService.getCurrentUserProfile()
+            .then(profile => {
+                // console.log(profile)
+                if(profile.length == 0) {
+                    const newUserProfileInfo = {
+                        'profile_picture': 'profile pic here',
+                        'genre_like': 'none',
+                        'actor': 'none'
+                    }
+                    ProfileService.insertUserProfile(newUserProfileInfo)
+                }
+            })
+
        Promise.all([
            MovieService.getMyMovies(),
            MovieService.getAllMovies()
        ]).then(([arr1, arr2]) => {
            let myMovieIds = [];
            arr1.map(movie => {
-               console.log(movie)
+            //    console.log(movie)
                myMovieIds.push(movie.id);
            })
            let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
-           console.log(filteredMovies)
+        //    console.log(filteredMovies)
 
            this.setState({
                 filteredMovieList: filteredMovies,
@@ -36,8 +51,7 @@ class MovieRoulette extends React.Component {
         const movieOverview = currentMovie.overview;
         const genreID = [...currentMovie.genre_ids].join(', ');
         const releaseDate = currentMovie.release_date;
-
-        console.log(disliked)
+        // const user_id = 
 
         MovieService.postMovie({
             id: movieID,

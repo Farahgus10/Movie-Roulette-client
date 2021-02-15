@@ -1,6 +1,5 @@
 import React from 'react'
 import MovieProfileNav from './movieProfileNav';
-
 import './profile.css'
 
 class MovieProfile extends React.Component {

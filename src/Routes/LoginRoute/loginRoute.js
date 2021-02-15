@@ -11,7 +11,7 @@ export default class LoginRoute extends React.Component {
 
     handleLoginSucces = () => {
         const { location, history } = this.props
-        const destination = (location.state || {}).from || '/movie-roulette'
+        const destination = (location.state || {}).from || '/your-movies'
         history.push(destination)
     }
 
