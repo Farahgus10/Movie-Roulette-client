@@ -1,18 +1,47 @@
 import React from 'react'
 import MovieProfileNav from './movieProfileNav';
+import ProfileService from '../../Services/Profile-Service'
 import './profile.css'
 
 class MovieProfile extends React.Component {
+    state = {
+        genres: [],
+        profile_name: '',
+    }
+
+    componentDidMount() {
+        ProfileService.getCurrentUserProfile()
+            .then(profile => {
+                const genres = JSON.parse(profile[0].genre_like)
+                const name = profile[0].full_name
+                this.setState({
+                    genres: genres,
+                    profile_name: name
+                })
+            })
+    }
+
+    renderMovieGenres = () => {
+        return this.state.genres.map(name => 
+            <div>
+                <p>{name.name}</p>
+            </div>
+            )
+    }
+
     render() {
         return(
         <div className="profile">
             <MovieProfileNav path={this.props.location}/>
-            <p className="profile-title">*Username's* Movie Profile</p>
+            <p className="profile-title">{this.state.profile_name}</p>
 
             <div className="info">
+                <div>
+                    <button>Edit</button>
+                </div>
                 <div className="genre">
                     <p><b>Movie Genres:</b></p>
-                    <p>bla,h blah, blah</p>
+                    <p>{this.renderMovieGenres()}</p>
                 </div>
                 
                 <div className="actor">

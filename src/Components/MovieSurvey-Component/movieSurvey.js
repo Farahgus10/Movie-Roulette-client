@@ -82,7 +82,8 @@ export default class MovieSurvey extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const userID = this.state.profileId;
-        const genres = this.state.selectedGenres.join(',')
+        // const genres = this.state.selectedGenres.join(',')
+        const genres = JSON.stringify(this.state.selectedGenres)
         ProfileService.updateUserProfile(userID, {
             genre_like: genres
         })
