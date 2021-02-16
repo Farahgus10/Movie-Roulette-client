@@ -15,20 +15,53 @@ export default class MovieSurvey extends React.Component {
         selectedGenres: [],
     }
 
+
+    // Promise.all([
+    //     MovieService.getMyMovies(),
+    //     MovieService.getAllMovies()
+    // ]).then(([arr1, arr2]) => {
+    //     let myMovieIds = [];
+    //     arr1.map(movie => {
+    //      //    console.log(movie)
+    //         myMovieIds.push(movie.id);
+    //     })
+    //     let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
+    //  //    console.log(filteredMovies)
+
+    //     this.setState({
+    //          filteredMovieList: filteredMovies,
+    //     });
+    // })
+
     componentDidMount() {
-        MovieService.getMovieGenres()
-            .then(results => {
-                this.setState({
-                    allGenres: results.genres
-                })
-            })  
-            
-        ProfileService.getCurrentUserProfile()
-            .then(profile => {
-                this.setState({
-                    profileId: profile[0].user_id
-                })
+        Promise.all([
+            MovieService.getMovieGenres(),
+            ProfileService.getCurrentUserProfile()
+        ]).then(([genreArr, profileArr]) => {
+            const profileGenres = JSON.parse(profileArr[0].genre_like)
+            const genres = [];
+            genreArr.genres.map(genre => {
+                genres.push(genre)
             })
+            profileGenres.map(value => genres.map(id => (value.value === id.id) ? Object.assign({}, genres, {'checked': true}) : console.log('nothing')))
+            console.log(genres)
+           
+        })
+        // MovieService.getMovieGenres()
+        //     .then(results => {
+        //         this.setState({
+        //             allGenres: results.genres
+        //         })
+        //     })  
+            
+        // ProfileService.getCurrentUserProfile()
+        //     .then(profile => {
+        //         const genres = JSON.parse(profile[0].genre_like)
+        //         this.setState({
+        //             profileId: profile[0].user_id,
+        //             selectedGenres: genres
+        //         })
+        //     })
     }
 
     renderQuestion() {
@@ -53,6 +86,8 @@ export default class MovieSurvey extends React.Component {
             selectedGenres: genres
         })
     }
+
+    
 
     renderGenreQuestion() { 
         return this.state.allGenres.map((val, i) => 
@@ -82,7 +117,6 @@ export default class MovieSurvey extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const userID = this.state.profileId;
-        // const genres = this.state.selectedGenres.join(',')
         const genres = JSON.stringify(this.state.selectedGenres)
         ProfileService.updateUserProfile(userID, {
             genre_like: genres
@@ -93,7 +127,9 @@ export default class MovieSurvey extends React.Component {
     }
     
     render() {
-        console.log(this.state.selectedGenres)
+        const val = this.state.selectedGenres.map(genre => genre.value)
+        console.log(val)
+        // console.log(this.state.selectedGenres)
         return(
             <div>
                 <form className="survey_form" onSubmit={this.handleSubmit}>

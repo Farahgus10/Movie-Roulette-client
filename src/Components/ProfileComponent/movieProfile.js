@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import MovieProfileNav from './movieProfileNav';
 import ProfileService from '../../Services/Profile-Service'
 import './profile.css'
@@ -37,7 +38,7 @@ class MovieProfile extends React.Component {
 
             <div className="info">
                 <div>
-                    <button>Edit</button>
+                    <Link to='/movie-survey'>Edit</Link>
                 </div>
                 <div className="genre">
                     <p><b>Movie Genres:</b></p>
