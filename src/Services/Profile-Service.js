@@ -21,7 +21,19 @@ const ProfileService =  {
         })
         .then(res => 
             (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json());
-    }
+    },
+    updateUserProfile(id, profile_picture, genre_like, actor) {
+        return fetch(`http://localhost:8000/profile/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type' : 'application/json',
+                'authorization' : `bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify(profile_picture, genre_like, actor),
+        })
+        .then(res => 
+            (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json());
+    },
 }
 
 export default ProfileService
