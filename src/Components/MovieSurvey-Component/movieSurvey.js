@@ -34,34 +34,38 @@ export default class MovieSurvey extends React.Component {
     // })
 
     componentDidMount() {
-        Promise.all([
-            MovieService.getMovieGenres(),
-            ProfileService.getCurrentUserProfile()
-        ]).then(([genreArr, profileArr]) => {
-            const profileGenres = JSON.parse(profileArr[0].genre_like)
-            const genres = [];
-            genreArr.genres.map(genre => {
-                genres.push(genre)
-            })
-            profileGenres.map(value => genres.map(id => (value.value === id.id) ? Object.assign({}, genres, {'checked': true}) : console.log('nothing')))
-            console.log(genres)
-           
-        })
-        // MovieService.getMovieGenres()
-        //     .then(results => {
-        //         this.setState({
-        //             allGenres: results.genres
-        //         })
-        //     })  
-            
-        // ProfileService.getCurrentUserProfile()
-        //     .then(profile => {
-        //         const genres = JSON.parse(profile[0].genre_like)
-        //         this.setState({
-        //             profileId: profile[0].user_id,
-        //             selectedGenres: genres
-        //         })
+        // Promise.all([
+        //     MovieService.getMovieGenres(),
+        //     ProfileService.getCurrentUserProfile()
+        // ]).then(([genreArr, profileArr]) => {
+        //     const profileGenres = JSON.parse(profileArr[0].genre_like)
+        //     const genres = [];
+        //     genreArr.genres.map(genre => {
+        //         genres.push(genre)
         //     })
+        //     profileGenres.map(value => genres.map(id => (value.value === id.id) ? Object.assign({}, genres, {'checked': true}) : console.log('nothing')))
+        //     console.log(genres)
+           
+        // })
+        MovieService.getMovieGenres()
+            .then(results => {
+                this.setState({
+                    allGenres: results.genres
+                })
+            })  
+            
+        ProfileService.getCurrentUserProfile()
+            .then(profile => {
+                if(profile[0].genre_like !== 'none') {
+                    this.setState({
+                        selectedGenres: JSON.parse(profile[0].genre_like)
+                    })
+                }
+                this.setState({
+                    profileId: profile[0].user_id,
+                    // selectedGenres: genres
+                })
+            })
     }
 
     renderQuestion() {
@@ -90,6 +94,47 @@ export default class MovieSurvey extends React.Component {
     
 
     renderGenreQuestion() { 
+        const val = this.state.selectedGenres.map(genre => genre).sort(function(a,b) {return a-b})
+        // console.log(val)
+
+        const genres = this.state.allGenres.map(genre => genre).sort(function(a,b) {return a-b})
+        // console.log(genres)
+
+
+        let matchFound;
+        let matches = [];
+        for(let i=0; i< val.length; i++) {
+            matchFound = false;
+            for(let y=0; y < genres.length; y++) {
+                if(val[i].value == genres[y].id) {
+                    matchFound = true;
+                    break;
+                } 
+            }
+
+            if(matchFound) {
+                // console.log('found > ' + val[i].value)
+                matches.push(val[i].value)
+            } else {
+                // console.log('not found >' + val[i])
+            }
+        }
+
+        let hash = Object.create(null);
+        matches.forEach(function(a) {
+            hash[a] = a;
+            // console.log(hash)
+        })
+
+        this.state.allGenres.forEach(function(a, i, aa) {
+            hash[a] = a.id
+            console.log(hash)
+            // if(hash[a]) {
+            //     aa[i] = 'match';
+            // }
+        })
+        // console.log(this.state.allGenres)
+
         return this.state.allGenres.map((val, i) => 
             <div>
                 <input onChange={e => this.selectCheckbox(e)} type="checkbox" id={val.id} value={val.id} name={val.name}/>
@@ -127,9 +172,30 @@ export default class MovieSurvey extends React.Component {
     }
     
     render() {
-        const val = this.state.selectedGenres.map(genre => genre.value)
-        console.log(val)
-        // console.log(this.state.selectedGenres)
+        // const val = this.state.selectedGenres.map(genre => genre).sort(function(a,b) {return a-b})
+        // console.log(val)
+
+        // const genres = this.state.allGenres.map(genre => genre).sort(function(a,b) {return a-b})
+        // console.log(genres)
+
+
+        // let matchFound;
+        // for(let i=0; i< val.length; i++) {
+        //     matchFound = false;
+        //     for(let y=0; y < genres.length; y++) {
+        //         if(val[i].value == genres[y].id) {
+        //             matchFound = true;
+        //             break;
+        //         } 
+        //     }
+
+        //     if(matchFound) {
+        //         console.log('found > ' + val[i].value)
+        //     } else {
+        //         console.log('not found >' + val[i])
+        //     }
+        // }
+
         return(
             <div>
                 <form className="survey_form" onSubmit={this.handleSubmit}>

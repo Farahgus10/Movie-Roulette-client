@@ -13,10 +13,13 @@ class MovieProfile extends React.Component {
     componentDidMount() {
         ProfileService.getCurrentUserProfile()
             .then(profile => {
-                const genres = JSON.parse(profile[0].genre_like)
+                if(profile[0].genre_like !== 'none') {
+                    this.setState({
+                        genres: JSON.parse(profile[0].genre_like)
+                    })
+                }
                 const name = profile[0].full_name
                 this.setState({
-                    genres: genres,
                     profile_name: name
                 })
             })
@@ -31,6 +34,7 @@ class MovieProfile extends React.Component {
     }
 
     render() {
+        console.log(this.state.genres)
         return(
         <div className="profile">
             <MovieProfileNav path={this.props.location}/>
