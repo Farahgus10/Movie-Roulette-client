@@ -15,38 +15,7 @@ export default class MovieSurvey extends React.Component {
         selectedGenres: [],
     }
 
-
-    // Promise.all([
-    //     MovieService.getMyMovies(),
-    //     MovieService.getAllMovies()
-    // ]).then(([arr1, arr2]) => {
-    //     let myMovieIds = [];
-    //     arr1.map(movie => {
-    //      //    console.log(movie)
-    //         myMovieIds.push(movie.id);
-    //     })
-    //     let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
-    //  //    console.log(filteredMovies)
-
-    //     this.setState({
-    //          filteredMovieList: filteredMovies,
-    //     });
-    // })
-
     componentDidMount() {
-        // Promise.all([
-        //     MovieService.getMovieGenres(),
-        //     ProfileService.getCurrentUserProfile()
-        // ]).then(([genreArr, profileArr]) => {
-        //     const profileGenres = JSON.parse(profileArr[0].genre_like)
-        //     const genres = [];
-        //     genreArr.genres.map(genre => {
-        //         genres.push(genre)
-        //     })
-        //     profileGenres.map(value => genres.map(id => (value.value === id.id) ? Object.assign({}, genres, {'checked': true}) : console.log('nothing')))
-        //     console.log(genres)
-           
-        // })
         MovieService.getMovieGenres()
             .then(results => {
                 this.setState({
@@ -63,7 +32,6 @@ export default class MovieSurvey extends React.Component {
                 }
                 this.setState({
                     profileId: profile[0].user_id,
-                    // selectedGenres: genres
                 })
             })
     }
@@ -91,8 +59,6 @@ export default class MovieSurvey extends React.Component {
         })
     }
 
-    
-
     renderGenreQuestion() { 
         const val = this.state.selectedGenres.map(genre => genre).sort(function(a,b) {return a-b})
         const genres = this.state.allGenres.map(genre => genre).sort(function(a,b) {return a-b})
@@ -113,14 +79,13 @@ export default class MovieSurvey extends React.Component {
             }
         }
 
-        console.log(this.state.selectedGenres)
-
         return this.state.allGenres.map((val, id) =>
             <label key={id}>
                 {val.name}
                 <input
+                    onClick={this.selectCheckbox}
                     type="checkbox"
-                    value={val}
+                    value={val.id}
                     name={val.name}
                     checked={matches.includes(val.id)}
                 /><br></br>
@@ -134,15 +99,15 @@ export default class MovieSurvey extends React.Component {
         }
     }
 
-    nextQuestion = () => {
-        if(this.state.questionIndex <= this.state.questions.length) {
-            this.setState({
-                questionIndex: this.state.questionIndex + 1
-            })
-        } else {
-            console.log('end of quiz function here')
-        }
-    }
+    // nextQuestion = () => {
+    //     if(this.state.questionIndex <= this.state.questions.length) {
+    //         this.setState({
+    //             questionIndex: this.state.questionIndex + 1
+    //         })
+    //     } else {
+    //         console.log('end of quiz function here')
+    //     }
+    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -153,21 +118,19 @@ export default class MovieSurvey extends React.Component {
         })
             .then(res => {
                 TokenService.saveAuthToken(res.authToken)
+                this.props.submitSuccess()
             })
     }
     
     render() {
-        console.log(this.state.allGenres)
-
         return(
             <div>
                 <form className="survey_form" onSubmit={this.handleSubmit}>
                     {this.renderQuestion()[this.state.questionIndex]}<br></br>
                     {this.renderAnswers()}
-                    <button onClick={this.nextQuestion}>Next</button>
-                    <button type='submit' >Submit</button>
+                    {/* <button onClick={this.nextQuestion}>Next</button> */}
+                    <button type='submit'>Submit</button>
                 </form>
-                
             </div>            
         )
     }

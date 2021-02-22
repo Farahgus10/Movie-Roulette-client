@@ -7,7 +7,7 @@ import MoviePreference from './Components/MovieQuiz-Component/moviePreference'
 import MovieRoulette from './Components/MovieRoulette-Component/movieRoulette'
 import YourMovies from './Components/ProfileComponent/yourMovies'
 import MovieProfile from './Components/ProfileComponent/movieProfile'
-import MovieSurvey from './Components/MovieSurvey-Component/movieSurvey'
+import MovieSurveyRoute from './Routes/MovieSurveyRoute/movieSurveyRoute'
 import Footer from './Components/FooterComponent/footer'
 import MovieService from './Services/Movie-Service'
 import PrivateRoute from './Routes/PrivateRoute/Private-route'
@@ -47,7 +47,7 @@ class App extends React.Component {
           <PrivateRoute path={'/movie-roulette'} component={MovieRoulette}/>
           <PrivateRoute path={'/your-movies'} component={YourMovies} />
           <PrivateRoute path={'/movie-profile'} component={MovieProfile} />
-          <PrivateRoute path={'/movie-survey'} component={MovieSurvey} />
+          <PrivateRoute path={'/movie-survey'} component={MovieSurveyRoute} />
         </Switch>
         <Footer />
       </main>
