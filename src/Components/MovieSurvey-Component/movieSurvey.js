@@ -95,11 +95,7 @@ export default class MovieSurvey extends React.Component {
 
     renderGenreQuestion() { 
         const val = this.state.selectedGenres.map(genre => genre).sort(function(a,b) {return a-b})
-        // console.log(val)
-
         const genres = this.state.allGenres.map(genre => genre).sort(function(a,b) {return a-b})
-        // console.log(genres)
-
 
         let matchFound;
         let matches = [];
@@ -113,33 +109,22 @@ export default class MovieSurvey extends React.Component {
             }
 
             if(matchFound) {
-                // console.log('found > ' + val[i].value)
-                matches.push(val[i].value)
-            } else {
-                // console.log('not found >' + val[i])
+                matches.push(val[i].value);
             }
         }
 
-        let hash = Object.create(null);
-        matches.forEach(function(a) {
-            hash[a] = a;
-            // console.log(hash)
-        })
+        console.log(this.state.selectedGenres)
 
-        this.state.allGenres.forEach(function(a, i, aa) {
-            hash[a] = a.id
-            console.log(hash)
-            // if(hash[a]) {
-            //     aa[i] = 'match';
-            // }
-        })
-        // console.log(this.state.allGenres)
-
-        return this.state.allGenres.map((val, i) => 
-            <div>
-                <input onChange={e => this.selectCheckbox(e)} type="checkbox" id={val.id} value={val.id} name={val.name}/>
-                <label for={val.name}>{val.name}</label>
-            </div>
+        return this.state.allGenres.map((val, id) =>
+            <label key={id}>
+                {val.name}
+                <input
+                    type="checkbox"
+                    value={val}
+                    name={val.name}
+                    checked={matches.includes(val.id)}
+                /><br></br>
+            </label> 
         )
     }
 
@@ -172,29 +157,7 @@ export default class MovieSurvey extends React.Component {
     }
     
     render() {
-        // const val = this.state.selectedGenres.map(genre => genre).sort(function(a,b) {return a-b})
-        // console.log(val)
-
-        // const genres = this.state.allGenres.map(genre => genre).sort(function(a,b) {return a-b})
-        // console.log(genres)
-
-
-        // let matchFound;
-        // for(let i=0; i< val.length; i++) {
-        //     matchFound = false;
-        //     for(let y=0; y < genres.length; y++) {
-        //         if(val[i].value == genres[y].id) {
-        //             matchFound = true;
-        //             break;
-        //         } 
-        //     }
-
-        //     if(matchFound) {
-        //         console.log('found > ' + val[i].value)
-        //     } else {
-        //         console.log('not found >' + val[i])
-        //     }
-        // }
+        console.log(this.state.allGenres)
 
         return(
             <div>
