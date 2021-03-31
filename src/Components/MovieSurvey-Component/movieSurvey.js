@@ -116,10 +116,9 @@ export default class MovieSurvey extends React.Component {
         ProfileService.updateUserProfile(userID, {
             genre_like: genres
         })
-            .then(res => {
-                TokenService.saveAuthToken(res.authToken)
+            .then(
                 this.props.submitSuccess()
-            })
+            )
     }
     
     render() {
