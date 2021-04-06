@@ -14,7 +14,6 @@ class MovieRoulette extends React.Component {
     componentDidMount() {
         ProfileService.getCurrentUserProfile()
             .then(profile => {
-                // console.log(profile)
                 if(profile.length == 0) {
                     const newUserProfileInfo = {
                         'profile_picture': 'profile pic here',
@@ -22,20 +21,25 @@ class MovieRoulette extends React.Component {
                         'actor': 'none'
                     }
                     ProfileService.insertUserProfile(newUserProfileInfo)
+                    
                 }
+                this.setState({
+                    currentProfileInfo: profile
+                })
             })
 
        Promise.all([
            MovieService.getMyMovies(),
            MovieService.getAllMovies()
        ]).then(([arr1, arr2]) => {
+           console.log(this.state.currentProfileInfo)
+          // let myGenres = this.state.currentProfileInfo.map(info => info.genre_like.map(genre => genre.value));
+          // console.log(myGenres)
            let myMovieIds = [];
            arr1.map(movie => {
-            //    console.log(movie)
                myMovieIds.push(movie.id);
            })
            let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
-        //    console.log(filteredMovies)
 
            this.setState({
                 filteredMovieList: filteredMovies,
@@ -51,7 +55,7 @@ class MovieRoulette extends React.Component {
         const movieOverview = currentMovie.overview;
         const genreID = [...currentMovie.genre_ids].join(', ');
         const releaseDate = currentMovie.release_date;
-        // const user_id = 
+        const user_id = this.state.currentProfileInfo.map(info => info.user_id).toString();
 
         MovieService.postMovie({
             id: movieID,
@@ -59,7 +63,8 @@ class MovieRoulette extends React.Component {
             overview: movieOverview,
             genre_id: genreID,
             release_date: releaseDate,
-            disliked: disliked
+            disliked: disliked,
+            user_id: user_id,
         })
     }
 

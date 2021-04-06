@@ -12,7 +12,6 @@ class YourMovies extends React.Component {
     componentDidMount() {
         ProfileService.getCurrentUserProfile()
             .then(profile => {
-                console.log(profile)
                 if(profile.length == 0) {
                     const newUserProfileInfo = {
                         'profile_picture': 'profile pic here',
