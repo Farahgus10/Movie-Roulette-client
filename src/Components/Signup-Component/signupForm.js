@@ -44,7 +44,7 @@ class signupForm extends React.Component {
               {/* <button type="submit" value="signup" id="signup-submit">Sign up!</button> */}
               <button type='submit' className="sign-up-button btn">Sign Up!</button>
               
-              <Link to="/">Already have an account? Click here to login.</Link>
+              <Link to="/login">Already have an account? Click here to login.</Link>
           </form>
 
             

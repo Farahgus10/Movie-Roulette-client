@@ -12,7 +12,8 @@ export default class MovieSurveyRoute extends React.Component{
     handleSubmitSucces = () => {
         const { location, history } = this.props
         const destination = (location.state || {}).from || '/movie-profile'
-        history.push(destination)
+        setTimeout(function(){ history.push(destination) }, 500);
+        
     }
 
     render() {

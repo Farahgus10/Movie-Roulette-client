@@ -32,15 +32,18 @@ class MovieRoulette extends React.Component {
            MovieService.getMyMovies(),
            MovieService.getAllMovies()
        ]).then(([arr1, arr2]) => {
-           console.log(this.state.currentProfileInfo)
-          // let myGenres = this.state.currentProfileInfo.map(info => info.genre_like.map(genre => genre.value));
-          // console.log(myGenres)
+          let myGenres = JSON.parse(this.state.currentProfileInfo.map(info => info.genre_like)).map(genre => genre.value);
            let myMovieIds = [];
            arr1.map(movie => {
                myMovieIds.push(movie.id);
            })
+           console.log(myMovieIds)
+           console.log(arr2)
            let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
-
+        //    let filteredGenres = filteredMovies.filter(genre => !myGenres.includes(val.map(id => )))
+        console.log(filteredMovies)
+           console.log(filteredMovies.map(genre => genre.genre_ids))
+         
            this.setState({
                 filteredMovieList: filteredMovies,
            });

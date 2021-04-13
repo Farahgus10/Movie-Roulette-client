@@ -10,7 +10,7 @@ class MovieProfile extends React.Component {
         profile_name: '',
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         ProfileService.getCurrentUserProfile()
             .then(profile => {
                 if(profile[0].genre_like !== 'none') {
@@ -26,15 +26,15 @@ class MovieProfile extends React.Component {
     }
 
     renderMovieGenres = () => {
-        return this.state.genres.map(name => 
+        return (this.state.genres.length === 0) ? "You haven't selected any genres that you like. " : this.state.genres.map(name => 
             <div>
                 <p>{name.name}</p>
             </div>
             )
+   
     }
 
     render() {
-        console.log(this.state.genres)
         return(
         <div className="profile">
             <MovieProfileNav path={this.props.location}/>
