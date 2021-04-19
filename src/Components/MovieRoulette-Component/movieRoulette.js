@@ -32,17 +32,15 @@ class MovieRoulette extends React.Component {
            MovieService.getMyMovies(),
            MovieService.getAllMovies()
        ]).then(([arr1, arr2]) => {
+
           let myGenres = JSON.parse(this.state.currentProfileInfo.map(info => info.genre_like)).map(genre => genre.value);
+
            let myMovieIds = [];
            arr1.map(movie => {
                myMovieIds.push(movie.id);
            })
-           console.log(myMovieIds)
-           console.log(arr2)
-           let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
-        //    let filteredGenres = filteredMovies.filter(genre => !myGenres.includes(val.map(id => )))
-        console.log(filteredMovies)
-           console.log(filteredMovies.map(genre => genre.genre_ids))
+           
+           let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id)).filter(val => val.genre_ids.includes(parseInt(myGenres)))
          
            this.setState({
                 filteredMovieList: filteredMovies,
@@ -108,9 +106,9 @@ class MovieRoulette extends React.Component {
             <div>
                 <h1>Movie Roulette</h1>
                 <div className="roulette">
-                    <div className="roulette-pic">
-                        <img src={currentMoviePoster} alt="image" />
-                    </div>
+                    {/* <div className="roulette-pic">
+                        <img src={'https://image.tmdb.org/t/p/w300/'+currentMoviePoster} alt="image" />
+                    </div> */}
                     <div className="roulette-desc">
                         <p><em><b>{currentMovieTitle}</b></em></p>
                         <p>{currentMovieOverview}</p>
