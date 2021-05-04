@@ -35,10 +35,10 @@ class YourMovies extends React.Component {
     }
 
     renderProfileInfo() {
-        if(this.state.currentProfileInfo.length !== 0) {
+        if(this.state.yourMovies.length !== 0) {
             return (
                 this.state.yourMovies.map((movie, i) => {
-                    return (
+                    return ( 
                         <div>
                         <li key={i}>
                            <ul>
@@ -58,7 +58,6 @@ class YourMovies extends React.Component {
     }
 
     render() {
-        console.log(this.state.currentProfileInfo)
         const path = this.props.location
 
         return( 

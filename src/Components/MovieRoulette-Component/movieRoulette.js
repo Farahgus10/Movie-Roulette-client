@@ -13,64 +13,59 @@ state = {
 }
 
 componentDidMount() {
-    ProfileService.getCurrentUserProfile()
-        .then(profile => {
-            if(profile.length == 0) {
-                const newUserProfileInfo = {
-                    'profile_picture': 'profile pic here',
-                    'genre_like': 'none',
-                    'actor': 'none'
-                }
-                ProfileService.insertUserProfile(newUserProfileInfo)
-                
-            }
-            this.setState({
-                currentProfileInfo: profile
-            })
-        })
-
-        this.loadMovies();
-    // Promise.all([
-    //     MovieService.getMyMovies(),
-    //     MovieService.getAllMovies(this.state.currentPage)
-    // ]).then(([arr1, arr2]) => {
-    //     console.log(arr2)
-    //     let myGenres;
-    //     (this.state.currentProfileInfo.map(genre => genre.genre_like === "none")) ? myGenres = [] : myGenres = JSON.parse(this.state.currentProfileInfo.map(info => info.genre_like)).map(genre => genre.value);
-
-    //     let myMovieIds = [];
-    //     arr1.map(movie => {
-    //         myMovieIds.push(movie.id);
-    //     })
-        
-    //     let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
-        
-    //     //.filter(val => val.genre_ids.includes(parseInt(myGenres)))
-    //     console.log(filteredMovies)
-
-    //     this.setState({
-    //         filteredMovieList: filteredMovies,
-    //     });
-        
-    // })
+    this.loadMovies();
 }
 
 loadMovies = () => {
     Promise.all([
         MovieService.getMyMovies(),
-        MovieService.getAllMovies(this.state.currentPage)
-    ]).then(([arr1, arr2]) => {
-        let myGenres;
-        (this.state.currentProfileInfo.map(genre => genre.genre_like === "none")) ? myGenres = [] : myGenres = JSON.parse(this.state.currentProfileInfo.map(info => info.genre_like)).map(genre => genre.value);
+        MovieService.getAllMovies(this.state.currentPage),
+        ProfileService.getCurrentUserProfile()
+    ]).then(([arr1, arr2, profile]) => {
+        if(profile.length == 0) {
+            const newUserProfileInfo = {
+                'profile_picture': 'profile pic here',
+                'genre_like': 'none',
+                'actor': 'none'
+            }
+            ProfileService.insertUserProfile(newUserProfileInfo)
+        }
+            this.setState({
+                currentProfileInfo: profile
+            })
 
+        // Variables 
+        let myGenres; 
         let myMovieIds = [];
+        let filteredMovies;
+
+        // Get the movie id's of movies that the user has already rated 
         arr1.map(movie => {
             myMovieIds.push(movie.id);
         })
-        
-        let filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
-        
-        //.filter(val => val.genre_ids.includes(parseInt(myGenres)))
+
+        // Get the user's preferred genres, if they have any
+        if(profile.map(genre => genre.genre_like) === "none") {
+            myGenres = [];
+        } else {
+            myGenres = profile.map(genre => JSON.parse(genre.genre_like)).map(info => info.map(val => val.value))[0]
+            console.log(myGenres)
+        }
+
+        // Filter out movies the user has already rated. If they have preferred genres, filter out non-relevent genres. If not, show all movies
+        if(myGenres.length === 0) {
+            console.log('empty')
+            filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
+        } else {
+            console.log('not empty')
+            filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id)).filter(val => val.genre_ids.includes(parseInt(myGenres)))
+        }
+
+        // filteredMovies might be empty if a new list is loaded with no genres that the user likes. If this happens, load more
+        if(filteredMovies.length === 0) {
+            this.loadMovies();
+        }
+        console.log(filteredMovies)
         
         this.setState({
             filteredMovieList: filteredMovies,
@@ -111,6 +106,9 @@ thumbsDown = () => {
             currentMovieIndex: this.state.currentMovieIndex
         })
 
+        console.log(this.state.filteredMovieList)
+
+        // once end of first list is reached, go to next page and load more movies
         if(this.state.filteredMovieList.length < 1) {
             this.setState({
                 currentPage: this.state.currentPage + 1,
@@ -134,6 +132,9 @@ thumbsUp = () => {
             currentMovieIndex: this.state.currentMovieIndex
         })
 
+        console.log(this.state.filteredMovieList)
+
+        // once end of first list is reached, go to next page and load more movies
         if(this.state.filteredMovieList.length < 1) {
             this.setState({
                 currentPage: this.state.currentPage + 1,
@@ -144,6 +145,8 @@ thumbsUp = () => {
 }
 
 render() {
+    console.log(this.state.currentPage)
+
     let currentMovieTitle = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].original_title;
     let currentMovieOverview = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].overview;
     let currentMoviePoster = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].poster_path;
