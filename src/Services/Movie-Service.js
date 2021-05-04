@@ -1,8 +1,8 @@
 import TokenService from './Token-service'
 
 const movieService = {
-    getAllMovies() {
-        return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=2bb6427016a1701f4d730bde6d366c84`)
+    getAllMovies(page) {
+        return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=2bb6427016a1701f4d730bde6d366c84&page=${page}`)
             .then(res => 
                 (!res.ok)
                     ? res.json().then(e => Promise.reject(e))
