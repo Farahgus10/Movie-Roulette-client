@@ -40,11 +40,12 @@ class YourMovies extends React.Component {
                 this.state.yourMovies.map((movie, i) => {
                     return ( 
                         <div className="movie_list">
-                        <li key={i}>
+                            {console.log(movie)}
+                        <li key={movie.id}>
                            <ul>
                                <p>{movie.title}</p>
                                <p>{movie.overview}</p>
-                               <button onClick={this.handleWatched}>I've watched this</button>
+                               <button onClick={() => this.handleWatched(movie.id, movie.user_id)}>I've watched this</button>
                             </ul> 
                         </li>
                         </div>
@@ -58,8 +59,11 @@ class YourMovies extends React.Component {
         }
     }
 
-    handleWatched() {
-
+    handleWatched(id, user_id) {
+        MovieService.updateMovieList(id, user_id, {
+            watched: true,
+        })
+        
     }
  
     render() {

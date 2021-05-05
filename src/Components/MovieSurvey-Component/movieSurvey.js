@@ -99,16 +99,6 @@ export default class MovieSurvey extends React.Component {
         }
     }
 
-    // nextQuestion = () => {
-    //     if(this.state.questionIndex <= this.state.questions.length) {
-    //         this.setState({
-    //             questionIndex: this.state.questionIndex + 1
-    //         })
-    //     } else {
-    //         console.log('end of quiz function here')
-    //     }
-    // }
-
     handleSubmit = (e) => {
         e.preventDefault();
         const userID = this.state.profileId;
