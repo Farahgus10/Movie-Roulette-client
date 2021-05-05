@@ -39,11 +39,12 @@ class YourMovies extends React.Component {
             return (
                 this.state.yourMovies.map((movie, i) => {
                     return ( 
-                        <div>
+                        <div className="movie_list">
                         <li key={i}>
                            <ul>
                                <p>{movie.title}</p>
                                <p>{movie.overview}</p>
+                               <button onClick={this.handleWatched}>I've watched this</button>
                             </ul> 
                         </li>
                         </div>
@@ -57,13 +58,21 @@ class YourMovies extends React.Component {
         }
     }
 
+    handleWatched() {
+
+    }
+ 
     render() {
         const path = this.props.location
 
         return( 
-            <div>
-                <MovieProfileNav path={path} />
-                {this.renderProfileInfo()}
+            <div className="your_movies">
+                <div className="movie_nav">
+                    <MovieProfileNav path={path} />
+                </div>
+                
+                {this.renderProfileInfo()} 
+                
             </div>
         )
     }

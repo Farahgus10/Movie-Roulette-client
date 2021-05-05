@@ -48,10 +48,9 @@ class MovieProfile extends React.Component {
                     <p><b>Movie Genres:</b></p>
                     <p>{this.renderMovieGenres()}</p>
                 </div>
-                
-                <div className="actor">
-                    <p><b>Actor:</b></p>
-                    <p>blah, blah, blah</p>
+                <div className="movies_watched">
+                    <p><b>Movies Watched:</b></p>
+                    <p>**number here**</p>
                 </div>
                 
             </div>

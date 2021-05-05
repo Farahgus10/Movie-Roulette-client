@@ -13,6 +13,7 @@ import Footer from './Components/FooterComponent/footer'
 import MovieService from './Services/Movie-Service'
 import PrivateRoute from './Routes/PrivateRoute/Private-route'
 import LandingPageRoute from './Routes/PublicRoute/LandingPageRoute/landingPageRoute'
+import WatchAgain from './Components/ProfileComponent/watchAgain'
 import './App.css'
 
 class App extends React.Component {
@@ -40,6 +41,7 @@ render() {
         <PrivateRoute path={'/movie-roulette'} component={MovieRoulette}/>
         <PrivateRoute path={'/your-movies'} component={YourMovies} />
         <PrivateRoute path={'/movie-profile'} component={MovieProfile} />
+        <PrivateRoute path={'/watch-again'} component={WatchAgain}/>
         <PrivateRoute path={'/movie-survey'} component={MovieSurveyRoute} />
       </Switch>
       <Footer />

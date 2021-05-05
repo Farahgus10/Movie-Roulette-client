@@ -44,10 +44,14 @@ loadMovies = () => {
             myMovieIds.push(movie.id);
         })
 
+        console.log(profile.map(genre => genre.genre_like)[0])
+
         // Get the user's preferred genres, if they have any
-        if(profile.map(genre => genre.genre_like) === "none") {
+        if(profile.map(genre => genre.genre_like)[0] === "none") {
+            console.log('no genres')
             myGenres = [];
         } else {
+            console.log('genres found')
             myGenres = profile.map(genre => JSON.parse(genre.genre_like)).map(info => info.map(val => val.value))[0]
             console.log(myGenres)
         }
@@ -90,6 +94,7 @@ addToYourMovies = (disliked) => {
         genre_id: genreID,
         release_date: releaseDate,
         disliked: disliked,
+        watched: false,
         user_id: user_id,
     })
 }
