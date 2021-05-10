@@ -44,24 +44,17 @@ loadMovies = () => {
             myMovieIds.push(movie.id);
         })
 
-        console.log(profile.map(genre => genre.genre_like)[0])
-
         // Get the user's preferred genres, if they have any
         if(profile.map(genre => genre.genre_like)[0] === "none") {
-            console.log('no genres')
             myGenres = [];
         } else {
-            console.log('genres found')
             myGenres = profile.map(genre => JSON.parse(genre.genre_like)).map(info => info.map(val => val.value))[0]
-            console.log(myGenres)
         }
 
         // Filter out movies the user has already rated. If they have preferred genres, filter out non-relevent genres. If not, show all movies
         if(myGenres.length === 0) {
-            console.log('empty')
             filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id))
         } else {
-            console.log('not empty')
             filteredMovies = arr2.results.filter(val => !myMovieIds.includes(val.id)).filter(val => val.genre_ids.includes(parseInt(myGenres)))
         }
 
@@ -69,7 +62,6 @@ loadMovies = () => {
         if(filteredMovies.length === 0) {
             this.loadMovies();
         }
-        console.log(filteredMovies)
         
         this.setState({
             filteredMovieList: filteredMovies,
@@ -111,8 +103,6 @@ thumbsDown = () => {
             currentMovieIndex: this.state.currentMovieIndex
         })
 
-        console.log(this.state.filteredMovieList)
-
         // once end of first list is reached, go to next page and load more movies
         if(this.state.filteredMovieList.length < 1) {
             this.setState({
@@ -137,8 +127,6 @@ thumbsUp = () => {
             currentMovieIndex: this.state.currentMovieIndex
         })
 
-        console.log(this.state.filteredMovieList)
-
         // once end of first list is reached, go to next page and load more movies
         if(this.state.filteredMovieList.length < 1) {
             this.setState({
@@ -150,8 +138,6 @@ thumbsUp = () => {
 }
 
 render() {
-    console.log(this.state.currentPage)
-
     let currentMovieTitle = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].original_title;
     let currentMovieOverview = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].overview;
     let currentMoviePoster = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].poster_path;
@@ -160,9 +146,9 @@ render() {
         <div>
             <h1>Movie Roulette</h1>
             <div className="roulette">
-                {/* <div className="roulette-pic">
+                <div className="roulette-pic">
                     <img src={'https://image.tmdb.org/t/p/w300/'+currentMoviePoster} alt="image" />
-                </div> */}
+                </div>
                 <div className="roulette-desc">
                     <p><em><b>{currentMovieTitle}</b></em></p>
                     <p>{currentMovieOverview}</p>

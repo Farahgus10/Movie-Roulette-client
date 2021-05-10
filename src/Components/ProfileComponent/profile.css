@@ -1,9 +1,5 @@
 .profile {
-    border: 1px solid red;
-    /* align-self: flex-start;
-    display: grid;
-    justify-items: center;
-    align-items: center; */
+    /* border: 1px solid red; */
 }
 
 .profile-title {
@@ -28,5 +24,28 @@
 }
 
 .info {
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
 }
+
+.your_movies {
+    border: 3px solid red;
+}
+
+.movie_group {
+    border: 4px solid pink;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul {
+    padding: 0;
+}
+
+.movie_list {
+    list-style: none;
+    border: 3px solid purple;
+    padding: 10px;
+    flex: 1 0 21%; /* explanation below */
+}
+
+

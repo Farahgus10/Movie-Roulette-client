@@ -50,7 +50,7 @@ class MovieProfile extends React.Component {
                 </div>
                 <div className="movies_watched">
                     <p><b>Movies Watched:</b></p>
-                    <p>**number here**</p>
+                    <p>{this.props.location.state.watchedNum}</p>
                 </div>
                 
             </div>

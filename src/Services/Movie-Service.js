@@ -41,13 +41,13 @@ const movieService = {
     },
     
     updateMovieList(id, user_id, watched) {
-        return fetch(`http://localhost:8000/myMovies`, {
+        return fetch(`http://localhost:8000/myMovies/${id}/${user_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type':'application/json',
                 'authorization': `bearer ${TokenService.getAuthToken()}`,   
             },
-            body: JSON.stringify(id, user_id, watched),
+            body: JSON.stringify(watched),
         })
         .then(res => {
             (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json()

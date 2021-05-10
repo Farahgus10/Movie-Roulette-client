@@ -7,6 +7,7 @@ class YourMovies extends React.Component {
     state = {
         yourMovies: [],
         currentProfileInfo: [],
+        watchedMovies: 0,
     }
 
     componentDidMount() {
@@ -29,7 +30,8 @@ class YourMovies extends React.Component {
         MovieService.getMyMovies()
             .then(movie => {
                 this.setState({
-                    yourMovies: movie.filter(val => !val.disliked)
+                    watchedMovies: movie.filter(val => val.watched).length,
+                    yourMovies: movie.filter(val => (!val.watched) && (!val.disliked))
                 })
             })
     }
@@ -40,7 +42,6 @@ class YourMovies extends React.Component {
                 this.state.yourMovies.map((movie, i) => {
                     return ( 
                         <div className="movie_list">
-                            {console.log(movie)}
                         <li key={movie.id}>
                            <ul>
                                <p>{movie.title}</p>
@@ -63,6 +64,11 @@ class YourMovies extends React.Component {
         MovieService.updateMovieList(id, user_id, {
             watched: true,
         })
+        .then(
+            this.setState({
+                yourMovies: this.state.yourMovies.filter(movie => movie.id != id)
+            })
+        )
         
     }
  
@@ -72,10 +78,12 @@ class YourMovies extends React.Component {
         return( 
             <div className="your_movies">
                 <div className="movie_nav">
-                    <MovieProfileNav path={path} />
+                    <MovieProfileNav path={path} watchedNum={this.state.watchedMovies}/>
+                </div>
+                <div className="movie_group">
+                  {this.renderProfileInfo()}   
                 </div>
                 
-                {this.renderProfileInfo()} 
                 
             </div>
         )

@@ -44,7 +44,7 @@ render() {
         <PrivateRoute path={'/watch-again'} component={WatchAgain}/>
         <PrivateRoute path={'/movie-survey'} component={MovieSurveyRoute} />
       </Switch>
-      <Footer />
+      <Footer path={this.props.location.pathname}/>
     </main>
   );
 }
