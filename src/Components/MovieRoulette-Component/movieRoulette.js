@@ -1,6 +1,8 @@
 import React from 'react';
 import MovieService from '../../Services/Movie-Service'
 import ProfileService from '../../Services/Profile-Service'
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './movieRoulette.css'
 
 class MovieRoulette extends React.Component {
@@ -74,6 +76,7 @@ addToYourMovies = (disliked) => {
     const currentMovie = this.state.filteredMovieList[this.state.currentMovieIndex];
     const movieID = currentMovie.id;
     const movieTitle = currentMovie.original_title;
+    const moviePoster = currentMovie.poster_path;
     const movieOverview = currentMovie.overview;
     const genreID = [...currentMovie.genre_ids].join(', ');
     const releaseDate = currentMovie.release_date;
@@ -82,6 +85,7 @@ addToYourMovies = (disliked) => {
     MovieService.postMovie({
         id: movieID,
         title: movieTitle,
+        poster: moviePoster,
         overview: movieOverview,
         genre_id: genreID,
         release_date: releaseDate,
@@ -156,6 +160,7 @@ render() {
             </div>
             <div className="thumbs">
                     <div className="thumbs-up">
+                        <FontAwesomeIcon icon={faThumbsUp}/>
                         <button onClick={this.thumbsUp}>thumbs up</button>
                     </div>
                     <div className="thumbs-down">

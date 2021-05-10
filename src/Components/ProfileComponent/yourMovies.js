@@ -44,7 +44,8 @@ class YourMovies extends React.Component {
                         <div className="movie_list">
                         <li key={movie.id}>
                            <ul>
-                               <p>{movie.title}</p>
+                                <img src={'https://image.tmdb.org/t/p/w300/'+movie.poster} alt="image" />
+                               <p><b>{movie.title}</b></p>
                                <p>{movie.overview}</p>
                                <button onClick={() => this.handleWatched(movie.id, movie.user_id)}>I've watched this</button>
                             </ul> 

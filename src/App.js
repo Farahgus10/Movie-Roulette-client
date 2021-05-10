@@ -29,7 +29,7 @@ render() {
   
   return (
     <main className='App'>
-      <Nav />
+      {/* <Nav /> */}
       {/* <LoginForm/> */}
       <Switch>
         <Route exact path='/' component={LandingPageRoute}/>

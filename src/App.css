@@ -9,3 +9,14 @@ html, body {
     bottom: 0;
     width: 100%;
 }
+
+.nav_link_logged_in {
+    background-color: #333;
+    position: fixed;
+    top: 0;
+}
+
+.nav_link_logged_in a {
+    color: #f2f2f2;
+    text-decoration: none;
+}

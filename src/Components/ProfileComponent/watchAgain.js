@@ -20,9 +20,10 @@ renderWatchedMovies() {
     if(this.state.myWatchedMovies.length != 0) {
         return this.state.myWatchedMovies.map(movie => {
             return (
-                <div className="watched_movies">
+                <div className="watched_movies_list">
                     <li key={movie.id}>
                         <ul>
+                            <img src={'https://image.tmdb.org/t/p/w300/'+movie.poster} alt="image" />
                             <p>{movie.title}</p>
                             <p>{movie.overview}</p>
                         </ul>
@@ -35,9 +36,14 @@ renderWatchedMovies() {
 
 render() {
     return (
-        <div className="watch_again">
-            <MovieProfileNav path={this.props.location} watchedNum={this.state.myWatchedMovies.length}/>
-            {this.renderWatchedMovies()}
+        <div className="watched_movies">
+            <div className="movie_nav">
+                <MovieProfileNav path={this.props.location} watchedNum={this.state.myWatchedMovies.length}/>
+            </div>
+            <div className="watch_again_group">
+                {this.renderWatchedMovies()}
+            </div>
+            
         </div>
     )
 }

@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+img {
+    max-width: 620px;
+    height: 460px;
+}
+
 .roulette-pic {
     border: 1px solid green;
     display: flex;
@@ -18,6 +23,8 @@
 .roulette-desc {
     border: 1px solid blue;
     width: 90%;
+    height: auto;
+    padding: 8px;
 }
 
 .thumbs {
