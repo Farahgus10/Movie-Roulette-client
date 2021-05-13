@@ -1,11 +1,84 @@
-.logo {
-    border: 1px solid red;
+body {
+    height: 100vh;
+    background: linear-gradient(#ee9617 0%, #fe5858 74%);
+    
 }
 
-.login_form, .signup_form {
-    border: 1px solid black;
-    align-self: flex-start;
-    display: grid;
-    justify-items: center;
+.login_page {
+    display: flex;
+    height: 100vh;
+}
+
+
+.login_form {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.login_form h1 {
+    color: white;
+}
+
+.form_wrapper {
+    list-style: none;
+}
+
+.form_row {
+    display: flex; 
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form_row input {
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form_row input, select, textarea {
+    color: white
+}
+
+.form_row input:focus {
+    outline: none;
+}
+
+
+.form_row input:focus::placeholder {
+    color: transparent;
+}
+
+.form_row input::placeholder {
+    color: white;
+}
+
+.form_row button {
+    background-color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.signup_link {
+    text-decoration: none;
+    color: #4F4C4C;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: medium;
+}
+
+.login_form button:hover {
+    cursor: pointer;
+}
+
+.signup_link:hover {
+    text-decoration: underline;
 }

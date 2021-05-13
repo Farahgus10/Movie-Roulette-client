@@ -34,17 +34,25 @@ class loginForm extends React.Component {
     render() {
         return (
             <div className="login_page">
-                <Logo/>
+                {/* <Logo/> */}
                 <div className="login_form">
                     <h1>Login</h1>
                     <form className="loginForm" onSubmit={this.handleSubmit}>
-                    <input type="text" name="full_name" id="full_name" placeholder="full_name"/>
-                    <input type="password" name="password" id="password" placeholder="password"/>
-                    <button type='submit' className="sign-up-button btn">Login</button>
-                    {/* <Link to="/movie-roulette">Login</Link> */}
-                </form>
+                        <ul className="form_wrapper">
+                            <li className="form_row">
+                                <input type="text" name="full_name" id="full_name" placeholder="full_name"/>
+                            </li>
+                            <li className="form_row">
+                                <input type="password" name="password" id="password"    placeholder="password"/>
+                            </li>
+                            <li className="form_row">
+                                <button type='submit' className="sign-up-button btn">Login</button>
+                            </li>
+                        </ul>
+                        <Link to="/signup" className="signup_link">Don't have an account? Sign up!</Link>
+                    </form>
 
-            <Link to="/signup">Don't have an account? Sign up!</Link>
+            
                 </div>
                 
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import './landingPageRoute.css'
 
 class LandingPage extends React.Component {
     render() {
@@ -7,10 +8,10 @@ class LandingPage extends React.Component {
             <div className="landing_main">
                 <div className="landing_intro">
                     <h1>Welcome to Movie Roulette</h1>
-                    <h2>A roulette game for movie nights where you just can't figure out what to watch</h2>
+                    <h2>A roulette game for movie nights when you just can't figure out what to watch</h2>
                 </div>
-                <div>
-                    <Link to='/login'>Log in</Link>
+                <div className="get_started">
+                    <Link to='/login'>Get Started</Link>
                 </div>
                 
             </div>

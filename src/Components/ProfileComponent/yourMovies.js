@@ -2,6 +2,7 @@ import React from 'react'
 import MovieProfileNav from './movieProfileNav';
 import MovieService from '../../Services/Movie-Service'
 import ProfileService from '../../Services/Profile-Service'
+import './profile.css'
 
 class YourMovies extends React.Component {
     state = {

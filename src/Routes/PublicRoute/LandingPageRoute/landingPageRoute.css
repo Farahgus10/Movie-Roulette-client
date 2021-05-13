@@ -1,0 +1,25 @@
+.landing_main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing_intro h1 {
+    text-align: center;
+}
+
+.get_started {
+    padding: 10px;
+    border-radius: 18px;
+    /* background-image: linear-gradient(#ee9617 0%, #fe5858 74%); */
+    background-color: white;
+
+}
+
+.get_started a  {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
