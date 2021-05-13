@@ -1,8 +1,6 @@
-body {
+/* body {
     height: 100vh;
-    background: linear-gradient(#ee9617 0%, #fe5858 74%);
-    
-}
+} */
 
 .login_page {
     display: flex;
