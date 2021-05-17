@@ -1,14 +1,10 @@
-.profile {
-    /* border: 1px solid red; */
-}
-
 .profile-title {
     text-align: center;
 }
 
 .nav {
     position: fixed;
-    /* border: 1px solid green; */
+    top: 0;
     background-color: #333;
     width: 100%;
     display: flex;
@@ -24,7 +20,6 @@
 }
 
 .nav-bar {
-    /* border: 1px solid blue; */
     width: 55%;
     display: flex;
     justify-content: space-around;
@@ -32,8 +27,10 @@
 }
 
 .your_movies, .watched_movies, .profile {
-    border: 1px solid white;
     padding-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -41,6 +38,12 @@
     margin-top: 120px;
     display: flex;
     flex-wrap: wrap;
+}
+
+@media screen and (max-width: 899px) {
+    .movie_group {
+        justify-content: center;
+    }
 }
 
 .profile-title {
@@ -64,8 +67,9 @@ ul {
 .movie_list, .watched_movies_list {
     list-style: none;
     padding: 10px;
+    margin-left: 10px;
     flex-basis: 30%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
 }
@@ -84,6 +88,12 @@ p {
     border: none;
     border-radius: 20px;
     padding: 10px;
+    transition: font-size 0.5s;
+}
+
+.movie_list_button button:hover {
+    cursor: pointer;
+    font-size: 15px;
 }
 
 

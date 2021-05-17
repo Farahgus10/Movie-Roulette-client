@@ -52,8 +52,8 @@ if(this.state.yourMovies.length !== 0) {
                         </li>  
                     </ul> 
                     <div className="movie_list_button">
-                            <button onClick={() => this.handleWatched(movie.id, movie.user_id)}>I've watched this</button>
-                        </div>
+                        <button onClick={() => this.handleWatched(movie.id, movie.user_id)}>I've watched this</button>
+                    </div>
                 </div>
             )
         })

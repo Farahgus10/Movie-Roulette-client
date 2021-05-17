@@ -13,7 +13,6 @@
 .get_started {
     padding: 10px;
     border-radius: 18px;
-    /* background-image: linear-gradient(#ee9617 0%, #fe5858 74%); */
     background-color: white;
 
 }
@@ -22,4 +21,9 @@
     text-decoration: none;
     color: #000000;
     font-weight: bold;
+    transition: font-size 0.5s;
+}
+
+.get_started a:hover {
+    font-size: 20px;
 }

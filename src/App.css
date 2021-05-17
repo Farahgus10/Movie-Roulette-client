@@ -4,8 +4,6 @@ html, body {
 }
 
 .footer {
-    color: blue;
-    border: 1px solid purple;
     position: fixed;
     bottom: 0;
     width: 100%;
