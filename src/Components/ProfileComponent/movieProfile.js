@@ -36,26 +36,38 @@ class MovieProfile extends React.Component {
 
     render() {
         return(
-        <div className="profile">
-            <MovieProfileNav path={this.props.location}/>
-            <p className="profile-title">{this.state.profile_name}</p>
+            <div className="profile">
+                <div className="movie_nav">
+                    <MovieProfileNav path={this.props.location}/> 
+                </div>
 
-            <div className="info">
-                <div>
-                    <Link to='/movie-survey'>Edit</Link>
+                <div className="user_info">
+                    <p className="profile-title">{this.state.profile_name}</p>
                 </div>
-                <div className="genre">
-                    <p><b>Movie Genres:</b></p>
-                    <p>{this.renderMovieGenres()}</p>
-                </div>
-                <div className="movies_watched">
-                    <p><b>Movies Watched:</b></p>
-                    <p>{this.props.location.state.watchedNum}</p>
-                </div>
+
                 
+
             </div>
+        // <div className="profile">
             
-        </div>
+      
+
+        //     <div className="info">
+        //         <div>
+        //             <Link to='/movie-survey'>Edit</Link>
+        //         </div>
+        //         <div className="genre">
+        //             <p><b>Movie Genres:</b></p>
+        //             <p>{this.renderMovieGenres()}</p>
+        //         </div>
+        //         <div className="movies_watched">
+        //             <p><b>Movies Watched:</b></p>
+        //             <p>{this.props.location.state.watchedNum}</p>
+        //         </div>
+                
+        //     </div>
+            
+        // </div>
     )
     }
     

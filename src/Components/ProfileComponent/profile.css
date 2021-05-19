@@ -26,13 +26,12 @@
     align-items: center;
 }
 
-.your_movies, .watched_movies, .profile {
+.your_movies, .watched_movies{
     padding-bottom: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .movie_group, .watch_again_group {
     margin-top: 120px;
@@ -94,6 +93,13 @@ p {
 .movie_list_button button:hover {
     cursor: pointer;
     font-size: 15px;
+}
+
+.profile {
+    /* border: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 
