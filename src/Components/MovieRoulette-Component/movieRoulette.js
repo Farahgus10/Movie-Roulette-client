@@ -1,8 +1,8 @@
 import React from 'react';
 import MovieService from '../../Services/Movie-Service'
 import ProfileService from '../../Services/Profile-Service'
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './movieRoulette.css'
 
 class MovieRoulette extends React.Component {
@@ -160,7 +160,7 @@ render() {
             </div>
             <div className="thumbs">
                     <div className="thumbs-up">
-                        <FontAwesomeIcon icon={faThumbsUp}/>
+                        {/* <FontAwesomeIcon icon={faThumbsUp}/> */}
                         <button onClick={this.thumbsUp}>thumbs up</button>
                     </div>
                     <div className="thumbs-down">

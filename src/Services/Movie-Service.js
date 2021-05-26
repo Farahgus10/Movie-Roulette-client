@@ -1,4 +1,5 @@
 import TokenService from './Token-service'
+import '../config'
 
 const movieService = {
     getAllMovies(page) {
