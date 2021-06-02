@@ -27,7 +27,7 @@ class MovieProfile extends React.Component {
 
     renderMovieGenres = () => {
         return (this.state.genres.length === 0) ? "You haven't selected any genres that you like. " : this.state.genres.map(name => 
-            <div>
+            <div className="genre_name">
                 <p>{name.name}</p>
             </div>
             )
@@ -45,30 +45,24 @@ class MovieProfile extends React.Component {
                     <p className="profile-title">{this.state.profile_name}</p>
                 </div>
 
-                
+                <div className="info">
+                    <div>
+                        <Link to='/movie-survey'>Edit</Link>
+                    </div>
 
+                    <div className="genre">
+                        <p><b>Movie Genres:</b></p>
+                        <div class="break"></div>
+                        {this.renderMovieGenres()}
+                    </div>
+
+                      <div className="movies_watched">
+                        <p><b>Movies Watched:</b></p>
+                        {/* <p>{this.props.location.state.watchedNum}</p> */}
+                    </div>
+                </div>
             </div>
-        // <div className="profile">
-            
-      
-
-        //     <div className="info">
-        //         <div>
-        //             <Link to='/movie-survey'>Edit</Link>
-        //         </div>
-        //         <div className="genre">
-        //             <p><b>Movie Genres:</b></p>
-        //             <p>{this.renderMovieGenres()}</p>
-        //         </div>
-        //         <div className="movies_watched">
-        //             <p><b>Movies Watched:</b></p>
-        //             <p>{this.props.location.state.watchedNum}</p>
-        //         </div>
-                
-        //     </div>
-            
-        // </div>
-    )
+        )
     }
     
 }
