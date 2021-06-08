@@ -1,7 +1,7 @@
 import React from 'react'
 import MovieService from '../../Services/Movie-Service'
 import ProfileService from '../../Services/Profile-Service'
-import TokenService from '../../Services/Token-service'
+import './movieSurvey.css'
 
 export default class MovieSurvey extends React.Component {
     state = {
@@ -36,13 +36,13 @@ export default class MovieSurvey extends React.Component {
             })
     }
 
-    renderQuestion() {
-       return this.state.questions.map(question => 
-            <div>
-                <p>{question}</p>
-            </div>
-        )
-    }
+    // renderQuestion() {
+    //    return this.state.questions.map(question => 
+    //         <div>
+    //             <p>{question}</p>
+    //         </div>
+    //     )
+    // }
 
     selectCheckbox = (e) => {
         const genres = this.state.selectedGenres
@@ -113,11 +113,10 @@ export default class MovieSurvey extends React.Component {
     
     render() {
         return(
-            <div>
+            <div className='survey'>
+                <h1>Select the Genres your prefer:</h1>
                 <form className="survey_form" onSubmit={this.handleSubmit}>
-                    {this.renderQuestion()[this.state.questionIndex]}<br></br>
                     {this.renderAnswers()}
-                    {/* <button onClick={this.nextQuestion}>Next</button> */}
                     <button type='submit'>Submit</button>
                 </form>
             </div>            
