@@ -1,9 +1,18 @@
+.roulette_content {
+    width: 100%;
+    height: 100vw;
+}
+
+.roulette_content h1 {
+    text-align: center;
+}
+
 .roulette {
-    border: 1px solid red;
     align-self: flex-start;
     display: grid;
     justify-items: center;
     align-items: center;
+    width: 100%;
 }
 
 img {
@@ -12,7 +21,6 @@ img {
 }
 
 .roulette-pic {
-    border: 1px solid green;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,15 +29,34 @@ img {
 }
 
 .roulette-desc {
-    border: 1px solid blue;
+    /* border: 1px solid red; */
+    margin-top: 20px;
+    text-align: center;
     width: 90%;
-    height: auto;
+    height: 100px;
     padding: 8px;
 }
 
 .thumbs {
+    width: 100%;
     display: flex;
-    border: 1px solid pink;
-    width: 15%;
-    justify-content: space-around;
+    justify-content: center;
 }
+
+button {
+    background-color: transparent;
+    border: 2px solid black;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+button:hover {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+button:hover { transform: scale(1.1); }

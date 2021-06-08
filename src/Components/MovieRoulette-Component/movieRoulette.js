@@ -3,6 +3,11 @@ import MovieService from '../../Services/Movie-Service'
 import ProfileService from '../../Services/Profile-Service'
 // import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ThumbsUp from '../../Images/LogoMakr-9y4t1T.png'
+import {AiOutlineLike} from 'react-icons/ai'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import './movieRoulette.css'
 
 class MovieRoulette extends React.Component {
@@ -147,7 +152,7 @@ render() {
     let currentMoviePoster = (!this.state.filteredMovieList[this.state.currentMovieIndex]) ? [] : this.state.filteredMovieList[this.state.currentMovieIndex].poster_path;
 
     return (
-        <div>
+        <div className="roulette_content">
             <h1>Movie Roulette</h1>
             <div className="roulette">
                 <div className="roulette-pic">
@@ -160,13 +165,12 @@ render() {
             </div>
             <div className="thumbs">
                     <div className="thumbs-up">
-                        {/* <FontAwesomeIcon icon={faThumbsUp}/> */}
-                        <button onClick={this.thumbsUp}>thumbs up</button>
+                        <button className="roulette_button" onClick={this.thumbsUp}><FontAwesomeIcon icon={farHeart} size='3x'/></button>
                     </div>
                     <div className="thumbs-down">
-                        <button onClick={this.thumbsDown}>thumbs down</button>
+                        <button className="roulette_button" onClick={this.thumbsDown}><FontAwesomeIcon icon={faTimes} size='3x'/></button>
                     </div>
-                </div> 
+            </div> 
         </div>
     )
 

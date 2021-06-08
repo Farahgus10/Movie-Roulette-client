@@ -36,14 +36,6 @@ export default class MovieSurvey extends React.Component {
             })
     }
 
-    // renderQuestion() {
-    //    return this.state.questions.map(question => 
-    //         <div>
-    //             <p>{question}</p>
-    //         </div>
-    //     )
-    // }
-
     selectCheckbox = (e) => {
         const genres = this.state.selectedGenres
         let index
@@ -79,16 +71,17 @@ export default class MovieSurvey extends React.Component {
             }
         }
 
-        return this.state.allGenres.map((val, id) =>
+        return this.state.allGenres.map((val, id) =>      
             <label key={id}>
                 {val.name}
-                <input
+            <input
                     onClick={this.selectCheckbox}
                     type="checkbox"
                     value={val.id}
                     name={val.name}
                     checked={matches.includes(val.id)}
                 /><br></br>
+                
             </label> 
         )
     }
@@ -116,6 +109,7 @@ export default class MovieSurvey extends React.Component {
             <div className='survey'>
                 <h1>Select the Genres your prefer:</h1>
                 <form className="survey_form" onSubmit={this.handleSubmit}>
+                    
                     {this.renderAnswers()}
                     <button type='submit'>Submit</button>
                 </form>
