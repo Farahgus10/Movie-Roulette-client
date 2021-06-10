@@ -3,16 +3,55 @@
 }
 
 .survey_form{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+}
+
+.survey_form input {
+    display: none;
+    visibility: hidden;
 }
 
 .survey_form label {
     box-sizing: border-box;
     padding: 20px;
     flex-basis: 25%;
-    border: 1px solid green;
+    border: 1px solid #333;
+    box-shadow: 3px 2px #333;
     text-align: center;
+    font-size: 1.1em;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
+
+.survey_form label:hover {
+    cursor: pointer;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(2px, 1px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-2px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+  .survey_form button {
+      border-radius: 10%;
+      
+  }
+
+  form {
+    flex-direction: column;
+  }

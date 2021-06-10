@@ -43,7 +43,7 @@ img {
     justify-content: center;
 }
 
-button {
+.thumbs button {
     background-color: transparent;
     border: 2px solid black;
     width: 70px;
@@ -54,9 +54,8 @@ button {
     margin-right: 20px;
 }
 
-button:hover {
+.thumbs button:hover {
     cursor: pointer;
     transition: all .2s ease-in-out;
+    transform: scale(1.1);
 }
-
-button:hover { transform: scale(1.1); }

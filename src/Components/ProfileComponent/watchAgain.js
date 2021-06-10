@@ -24,7 +24,7 @@ renderWatchedMovies() {
                     <li key={movie.id}>
                         <ul>
                             <img src={'https://image.tmdb.org/t/p/w300/'+movie.poster} alt="image" />
-                            <p>{movie.title}</p>
+                            <p><b>{movie.title}</b></p>
                             <p>{movie.overview}</p>
                         </ul>
                     </li>

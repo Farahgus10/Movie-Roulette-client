@@ -52,6 +52,10 @@ export default class MovieSurvey extends React.Component {
     }
 
     renderGenreQuestion() { 
+        // const genre_style = {
+        //     background: 'linear-gradient(#4B4A4A 0%, #333 74%)',
+        //     color: '#ee9617',
+        // }
         const val = this.state.selectedGenres.map(genre => genre).sort(function(a,b) {return a-b})
         const genres = this.state.allGenres.map(genre => genre).sort(function(a,b) {return a-b})
 
@@ -71,18 +75,22 @@ export default class MovieSurvey extends React.Component {
             }
         }
 
-        return this.state.allGenres.map((val, id) =>      
-            <label key={id}>
-                {val.name}
-            <input
-                    onClick={this.selectCheckbox}
-                    type="checkbox"
-                    value={val.id}
-                    name={val.name}
-                    checked={matches.includes(val.id)}
-                /><br></br>
-                
-            </label> 
+        return this.state.allGenres.map((val, id) =>   
+            // <div className="survey_box">
+                <label key={id} 
+                style={{background: matches.includes(val.id) ? 'linear-gradient(#4B4A4A 0%, #333 74%)' : 'none', color: matches.includes(val.id) ? '#ee9617' : 'black'}}
+                >
+                    {val.name}
+                <input
+                        onClick={this.selectCheckbox}
+                        type="checkbox"
+                        value={val.id}
+                        name={val.name}
+                        checked={matches.includes(val.id)}
+                    /><br></br>
+                    
+                </label> 
+            // </div>   
         )
     }
 
@@ -108,7 +116,7 @@ export default class MovieSurvey extends React.Component {
         return(
             <div className='survey'>
                 <h1>Select the Genres your prefer:</h1>
-                <form className="survey_form" onSubmit={this.handleSubmit}>
+                <form className="survey_form" onSubmit={this.handleSubmit} >
                     
                     {this.renderAnswers()}
                     <button type='submit'>Submit</button>
