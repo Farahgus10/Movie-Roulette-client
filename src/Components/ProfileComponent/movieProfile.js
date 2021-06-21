@@ -54,9 +54,9 @@ class MovieProfile extends React.Component {
                         {this.renderMovieGenres()}
                     </div>
 
-                      <div className="movies_watched">
+                      {/* <div className="movies_watched">
                         <p><b>Movies Watched:</b></p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

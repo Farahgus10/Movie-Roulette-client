@@ -76,7 +76,6 @@ export default class MovieSurvey extends React.Component {
         }
 
         return this.state.allGenres.map((val, id) =>   
-            // <div className="survey_box">
                 <label key={id} 
                 style={{background: matches.includes(val.id) ? 'linear-gradient(#4B4A4A 0%, #333 74%)' : 'none', color: matches.includes(val.id) ? '#ee9617' : 'black'}}
                 >
@@ -88,9 +87,7 @@ export default class MovieSurvey extends React.Component {
                         name={val.name}
                         checked={matches.includes(val.id)}
                     /><br></br>
-                    
-                </label> 
-            // </div>   
+                </label>   
         )
     }
 
@@ -119,7 +116,10 @@ export default class MovieSurvey extends React.Component {
                 <form className="survey_form" onSubmit={this.handleSubmit} >
                     
                     {this.renderAnswers()}
-                    <button type='submit'>Submit</button>
+                    <div className="button_holder">
+                        <button type='submit'>Submit</button>
+                    </div>
+                    
                 </form>
             </div>            
         )
