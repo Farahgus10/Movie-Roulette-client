@@ -58,7 +58,8 @@ if(this.state.yourMovies.length !== 0) {
             )
         })
     )
-} else {
+} 
+else {
     return (
         <h3>No movies here :(</h3>
     )

@@ -43,7 +43,7 @@ class loginForm extends React.Component {
                                 <input type="text" name="full_name" id="full_name" placeholder="full_name"/>
                             </li>
                             <li className="form_row">
-                                <input type="password" name="password" id="password"    placeholder="password"/>
+                                <input type="password" name="password" id="password"   placeholder="password"/>
                             </li>
                             <li className="form_row">
                                 <button type='submit' className="sign-up-button btn">Login</button>

@@ -16,7 +16,6 @@ export default class RegistrationRoute extends React.Component {
     render() {
         return(
             <section>
-                <div className="registration_header">Sign Up</div>
                 <div>
                     <RegistrationForm  registrationSuccess={this.handleRegistrationSuccess}/>
                 </div>

@@ -1,5 +1,5 @@
 import TokenService from './Token-service'
-import '../config'
+import config from '../config'
 
 const movieService = {
     getAllMovies(page) {

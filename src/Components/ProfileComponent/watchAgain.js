@@ -31,6 +31,10 @@ renderWatchedMovies() {
                 </div>
             )
         })
+    } else {
+        return (
+            <h3>You haven't watched anything yet.</h3>
+        )
     }
 }
 

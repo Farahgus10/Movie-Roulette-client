@@ -5,6 +5,7 @@
 .nav {
     position: fixed;
     top: 0;
+    left: 0;
     background-color: #333;
     width: 100%;
     display: flex;
@@ -28,9 +29,9 @@
 
 .your_movies, .watched_movies{
     padding-bottom: 40px;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    display: flex;
+    justify-content: center; 
 }
 
 .movie_group, .watch_again_group {
@@ -107,7 +108,13 @@ p {
 
 .edit_link {
     padding-top: 10px;
+    color: white;
 }
+
+.edit_link a {
+    color: #333;
+}
+
 
 .genre {
     margin-bottom: 30px;
