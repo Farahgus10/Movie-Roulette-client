@@ -12,15 +12,15 @@ class loginForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const { full_name, password } = e.target;
+        const { user_name, password } = e.target;
         this.setState({ errore: null })
 
         AuthApiService.postLogin({
-            full_name: full_name.value,
+            user_name: user_name.value,
             password: password.value,
         })
         .then(res => {
-            full_name.value = ''
+            user_name.value = ''
             password.value = ''
             TokenService.saveAuthToken(res.authToken)
             this.props.loginSuccess();
@@ -40,7 +40,7 @@ class loginForm extends React.Component {
                     <form className="loginForm" onSubmit={this.handleSubmit}>
                         <ul className="form_wrapper">
                             <li className="form_row">
-                                <input type="text" name="full_name" id="full_name" placeholder="full_name"/>
+                                <input type="text" name="user_name" id="user_name" placeholder="User Name"/>
                             </li>
                             <li className="form_row">
                                 <input type="password" name="password" id="password"   placeholder="password"/>

@@ -70,3 +70,9 @@
     border-radius: 8px;
     font-size: medium;
 }
+
+.form_alert {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
