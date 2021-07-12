@@ -18,7 +18,7 @@ const movieService = {
     },
 
     getMyMovies()  {
-        return fetch(`http://localhost:8000/myMovies`, {
+        return fetch(`${config.API_ENDPOINT}/myMovies`, {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,   
             },
@@ -28,7 +28,7 @@ const movieService = {
     },
 
     postMovie(id, title, poster, overview, genre_id, release_date, disliked, user_id) {
-        return fetch(`http://localhost:8000/myMovies`, {
+        return fetch(`${config.API_ENDPOINT}/myMovies`, {
             method: 'POST',
             headers: {
                 'content-type':'application/json',
@@ -42,7 +42,7 @@ const movieService = {
     },
     
     updateMovieList(id, user_id, watched) {
-        return fetch(`http://localhost:8000/myMovies/${id}/${user_id}`, {
+        return fetch(`${config.API_ENDPOINT}/myMovies/${id}/${user_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type':'application/json',

@@ -1,8 +1,9 @@
 import TokenService from './Token-service'
+import config from '../config'
 
 const ProfileService =  {
     getCurrentUserProfile() {
-        return fetch(`http://localhost:8000/profile/current-user`, {
+        return fetch(`${config.API_ENDPOINT}/profile/current-user`, {
             headers: {
                 'authorization' : `bearer ${TokenService.getAuthToken()}`
             },
@@ -11,7 +12,7 @@ const ProfileService =  {
             (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json());
     },
     insertUserProfile(profile_picture, genre_like, actor) {
-        return fetch(`http://localhost:8000/profile`, {
+        return fetch(`${config.API_ENDPOINT}/profile`, {
             method: 'POST',
             headers: {
                 'content-type' : 'application/json',
@@ -23,7 +24,7 @@ const ProfileService =  {
             (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json());
     },
     updateUserProfile(id, profile_picture, genre_like, actor) {
-        return fetch(`http://localhost:8000/profile/${id}`, {
+        return fetch(`${config.API_ENDPOINT}/profile/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type' : 'application/json',
