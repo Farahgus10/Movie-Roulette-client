@@ -80,3 +80,9 @@
 .signup_link:hover {
     text-decoration: underline;
 }
+
+.form_alert {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

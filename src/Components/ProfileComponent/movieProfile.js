@@ -47,13 +47,12 @@ class MovieProfile extends React.Component {
 
                 <div className="info">
                     <p><b>Movie Genres:</b></p>
-                    <div className='edit_link'>
-                        <Link to='/movie-survey'>Edit your genre selection</Link>
-                    </div>
                     <div className="genre">    
                         {this.renderMovieGenres()}
                     </div>
-
+                    <div className='edit_link'>
+                        <Link to='/movie-survey'>Edit your genre selection</Link>
+                    </div>
                       {/* <div className="movies_watched">
                         <p><b>Movies Watched:</b></p>
                     </div> */}

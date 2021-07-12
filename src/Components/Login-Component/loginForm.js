@@ -13,7 +13,6 @@ class loginForm extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         const { user_name, password } = e.target;
-        this.setState({ errore: null })
 
         AuthApiService.postLogin({
             user_name: user_name.value,
@@ -32,6 +31,7 @@ class loginForm extends React.Component {
 
 
     render() {
+        const { error } = this.state;
         return (
             <div className="login_page">
                 {/* <Logo/> */}
@@ -45,6 +45,11 @@ class loginForm extends React.Component {
                             <li className="form_row">
                                 <input type="password" name="password" id="password"   placeholder="password"/>
                             </li>
+
+                            <div role='alert' className='form_alert'>
+                                {error && <p>{error}</p>}
+                            </div>
+
                             <li className="form_row">
                                 <button type='submit' className="sign-up-button btn">Login</button>
                             </li>
