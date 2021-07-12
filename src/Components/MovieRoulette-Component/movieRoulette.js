@@ -119,9 +119,7 @@ thumbsDown = () => {
             })
             this.loadMovies();
         }     
-    })
-
-    
+    })  
 }
 
 thumbsUp = () => {
