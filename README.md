@@ -32,12 +32,12 @@ Run npm run migrate to configure the database and npm run migrate --NODE_ENV=tes
 
 
 ### Scripts
-Install the packages for the application npm install
-Start the application npm start
-Start the nodemon for the application npm run dev
-Run the migrations up npm run migrate
-Seed the database
-Run the migrations down npm run migrate --0
+1. Install the packages for the application npm install
+2. Start the application npm start
+3. Start the nodemon for the application npm run dev
+4. Run the migrations up npm run migrate
+5. Seed the database
+6. Run the migrations down npm run migrate --0
 
 
 ## Authorization
