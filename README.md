@@ -14,7 +14,7 @@ Movie Roulette is the perfect app for users who just can't figure out what to wa
 
 
 ### Setup
-Clone or fork this repository and the [server repository](https://github.com/Farahgus10/Movie-Roulette-Server). Run npm install on the client side and server. Create a database named "movie_roulette". Create a .env file with the following information:
+Clone or fork this repository and the [server repository](https://github.com/Farahgus10/Movie-Roulette-Server). Run npm install on the client side and server. On the server side, create a database named "movie_roulette". Create a .env file with the following information:
 ```
 PORT=8000
 TZ='UTC'
